@@ -3,7 +3,8 @@ import {connect} from 'react-redux';
 import {Router} from 'react-router-dom';
 
 import {history} from '../helpers';
-import visualizerPublicRoutes from '../Converter/routes/public.routes';
+import homePublicRoutes from '../Home/routes/public.routes';
+import gamePublicRoutes from '../Game/routes/public.routes';
 
 import './App.css';
 
@@ -11,7 +12,8 @@ class App extends React.Component {
     render() {
         return (
             <Router history={history}>
-                {visualizerPublicRoutes(this.props)}
+                {homePublicRoutes(this.props)}
+                {gamePublicRoutes(this.props)}
             </Router>
         );
     }

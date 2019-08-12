@@ -1,16 +1,16 @@
 import React from 'react';
 import {Switch, Route} from 'react-router-dom';
 import {routes} from "../constants";
-import {Root} from '../../Base'
+import {Main} from '../'
 
 const visualizerPublicRoutes = thisProps => {
     return (
         <Switch>
             <Route
                 exact
-                path={routes.ROOT}
+                path={routes.GAME}
                 render={props => (
-                    <Root
+                    <Main
                         {...props}
                         {...thisProps}
                     />
