@@ -5,60 +5,67 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 import {sleep} from "../resources/utils.resources";
+import {Resources} from "./components";
+
+import './static/css/Main.css';
 
 const styles = theme => ({});
+const defaultState = {
+    cities: [
+        {
+            name: 'city',
+            displayName: 'City',
+            resources: {
+                food: 1000,
+                wood: 1000,
+                stone: 1000,
+                iron: 1000,
+            },
+            troops: {
+                transporter: 0,
+                warrior: 0,
+                scout: 0,
+                swordsman: 0,
+                pikeman: 0,
+                archer: 0,
+                cavalry: 0,
+                cataphract: 0,
+                batteringRam: 0,
+                ballista: 0,
+                catapult: 0,
+            }
+        }
+    ],
+    currentCity: 0,
+    king: {
+        name: 'king',
+        level: 1,
+    },
+    armor: {
+        legs: {
+            level: 1,
+        },
+        chest: {
+            level: 1,
+        },
+        arms: {
+            level: 1,
+        },
+        shoulders: {
+            level: 1,
+        },
+        head: {
+            level: 1,
+        },
+        weaponry: {
+            level: 1,
+        },
+    },
+};
 
 class Main extends React.Component {
     state = {
-        cities: [
-            {
-                name: 'city',
-                displayName: 'City',
-                resources: {
-                    food: 1000,
-                    wood: 1000,
-                    stone: 1000,
-                    iron: 1000,
-                },
-                troops: {
-                    transporter: 0,
-                    warrior: 0,
-                    scout: 0,
-                    swordsman: 0,
-                    pikeman: 0,
-                    archer: 0,
-                    cavalry: 0,
-                    cataphract: 0,
-                    batteringRam: 0,
-                    ballista: 0,
-                    catapult: 0,
-                }
-            }
-        ],
-        king: {
-            name: 'king',
-            level: 1,
-        },
-        armor: {
-            legs: {
-                level: 1,
-            },
-            chest: {
-                level: 1,
-            },
-            arms: {
-                level: 1,
-            },
-            shoulders: {
-                level: 1,
-            },
-            head: {
-                level: 1,
-            },
-            weaponry: {
-                level: 1,
-            },
-        },
+        ...defaultState,
     };
 
     setStateAsync = state => {
@@ -71,14 +78,14 @@ class Main extends React.Component {
     }
 
     async componentDidMount() {
-        // console.log(this.state)
+        console.log(this.state)
         await this.updateCitiesResources();
     }
 
     async updateCitiesResources() {
         const {cities} = this.state;
 
-        await sleep(3);
+        await sleep(10);
 
         let updatedCities = cities.map(city => {
             let {resources} = city;
@@ -112,10 +119,10 @@ class Main extends React.Component {
     };
 
     render() {
+        const {cities, currentCity} = this.state;
+
         return (
-            <div>
-                GAME
-            </div>
+            <Resources resources={cities[currentCity].resources}/>
         );
     }
 }
