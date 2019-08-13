@@ -6,6 +6,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 import {sleep} from "../resources/utils.resources";
 import {
+    Gold,
     Resources,
     Troops,
 } from "./components";
@@ -43,7 +44,7 @@ const defaultState = {
             }
         }
     ],
-    currentCity: 0,
+    currentCity: 0,  // index of the city in view
     king: {
         name: 'king',
         level: 1,
@@ -68,6 +69,7 @@ const defaultState = {
             level: 1,
         },
     },
+    gold: 10000,
 };
 
 class Main extends React.Component {
@@ -126,10 +128,11 @@ class Main extends React.Component {
     };
 
     render() {
-        const {cities, currentCity} = this.state;
+        const {cities, currentCity, gold} = this.state;
 
         return (
             <div>
+                <Gold gold={gold}/>
                 <Resources resources={cities[currentCity].resources}/>
                 <Troops troops={cities[currentCity].troops}/>
             </div>
