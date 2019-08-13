@@ -1,27 +1,31 @@
 export const troopNames = {
-    TRS: `transporter`,
-    WAR: `warrior`,
-    SCT: `scout`,
-    SWD: `swordsman`,
-    PKE: `pikeman`,
-    ARC: `archer`,
-    CAV: `cavalry`,
-    CAT: `cataphract`,
+    TRANSPORTER: `transporter`,
+    WARRIOR: `warrior`,
+    SCOUT: `scout`,
+    SWORDSMAN: `swordsman`,
+    PIKEMAN: `pikeman`,
+    ARCHER: `archer`,
+    CAVALRY: `cavalry`,
+    CATAPHRACT: `cataphract`,
     RAM: `batteringRam`,
-    BAL: `ballista`,
-    PUL: `catapult`,
+    BALLISTA: `ballista`,
+    CATAPULT: `catapult`,
 };
 
+/**
+ * in seconds
+ *
+ */
 export const troopTrainingTimes = {
-    [troopNames.TRS]: 0,
-    [troopNames.WAR]: 0,
-    [troopNames.SCT]: 0,
-    [troopNames.SWD]: 0,
-    [troopNames.PKE]: 0,
-    [troopNames.ARC]: 0,
-    [troopNames.CAV]: 0,
-    [troopNames.CAT]: 0,
-    [troopNames.RAM]: 0,
-    [troopNames.BAL]: 0,
-    [troopNames.PUL]: 0,
+    [troopNames.TRANSPORTER]: 0,
+    [troopNames.WARRIOR]: 24,
+    [troopNames.SCOUT]: 98,
+    [troopNames.SWORDSMAN]: 150,
+    [troopNames.PIKEMAN]: 224,
+    [troopNames.ARCHER]: 350,
+    [troopNames.CAVALRY]: 500,
+    [troopNames.CATAPHRACT]: 1500,
+    [troopNames.RAM]: 3000,
+    [troopNames.BALLISTA]: 4500,
+    [troopNames.CATAPULT]: 6000,
 };
