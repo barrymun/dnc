@@ -9,4 +9,5 @@ export const internalBuildingNames = {
     WORKSHOP: `workshop`,
     BARRACKS: `barracks`,
     COTTAGE: `cottage`,
+    SPACE: `space`,
 };

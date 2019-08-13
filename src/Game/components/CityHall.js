@@ -17,14 +17,13 @@ class CityHall extends React.Component {
 
     render() {
         const {
-            classes,
             cityHall,
         } = this.props;
 
         return (
             <div>
                 <ReactSVG
-                    src="city/internal/cityHall.svg"
+                    src={cityHall.image}
                     className={'cityHallSVG'}
                 />
             </div>

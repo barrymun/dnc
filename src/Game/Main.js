@@ -49,11 +49,19 @@ const defaultState = {
                     {
                         name: internalBuildingNames.CITY_HALL,
                         level: 1,
+                        image: "city/internal/cityHall.svg",
                     },
                     {
                         name: internalBuildingNames.CITY_WALL,
                         level: 1,
                     },
+                    ...Array(24).fill(
+                        {
+                            name: internalBuildingNames.SPACE,
+                            level: 1,
+                            image: "city/internal/space.svg",
+                        }
+                    )
                 ],
                 external: [
                     {
@@ -165,7 +173,7 @@ class Main extends React.Component {
         return (
             <div>
                 <Gold gold={gold}/>
-                <CityMap buildings={cities[currentCity].buildings}/>
+                <CityMap buildings={cities[currentCity].buildings.internal}/>
                 <div className={'HUDContainer'}>
                     <HUD
                         cities={cities}
