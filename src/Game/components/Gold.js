@@ -8,7 +8,6 @@ import Paper from "@material-ui/core/Paper";
 const styles = theme => ({
     root: {
         overflowX: 'auto',
-        maxWidth: 200,
     },
 });
 

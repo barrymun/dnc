@@ -12,7 +12,6 @@ import TableBody from "@material-ui/core/TableBody";
 const styles = theme => ({
     root: {
         overflowX: 'auto',
-        maxWidth: 200,
     },
     table: {
         minWidth: 200,

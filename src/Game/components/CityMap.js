@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import ReactSVG from "react-svg";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
@@ -21,7 +20,7 @@ class CityMap extends React.Component {
             buildings,
         } = this.props;
 
-        let cityHall, cityWall;
+        let cityHall = {}, cityWall = {};
 
         let remainingBuildings = buildings
             .map(building => {
@@ -43,7 +42,7 @@ class CityMap extends React.Component {
         remainingBuildings = createChunks(remainingBuildings, 6);
 
         return (
-            <div>
+            <div className={'cityMap'}>
                 <CityHall cityHall={cityHall}/>
                 {
                     remainingBuildings.map((chunk, index) => {
@@ -58,8 +57,9 @@ class CityMap extends React.Component {
                                             <div
                                                 key={index}
                                             >
-                                                <ReactSVG
-                                                    src={building.image}
+                                                <img
+                                                    alt={internalBuildingNames.SPACE}
+                                                    src={building.src}
                                                     className={'internalBuildingSVG'}
                                                 />
                                             </div>

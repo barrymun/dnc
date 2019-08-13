@@ -1,7 +1,6 @@
 import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
-import ReactSVG from 'react-svg';
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
@@ -22,8 +21,10 @@ class CityHall extends React.Component {
 
         return (
             <div>
-                <ReactSVG
-                    src={cityHall.image}
+                <img
+                    onClick={() => console.log('CLICKED')}
+                    alt={internalBuildingNames.CITY_HALL}
+                    src={cityHall.src}
                     className={'cityHallSVG'}
                 />
             </div>

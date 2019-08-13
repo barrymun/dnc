@@ -49,7 +49,7 @@ const defaultState = {
                     {
                         name: internalBuildingNames.CITY_HALL,
                         level: 1,
-                        image: "city/internal/cityHall.svg",
+                        src: "city/internal/cityHall.png",
                     },
                     {
                         name: internalBuildingNames.CITY_WALL,
@@ -59,7 +59,7 @@ const defaultState = {
                         {
                             name: internalBuildingNames.SPACE,
                             level: 1,
-                            image: "city/internal/space.svg",
+                            src: "city/internal/space.png",
                         }
                     )
                 ],

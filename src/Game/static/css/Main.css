@@ -2,15 +2,30 @@
     position: fixed;
     top: 50px;
     right: 0;
+    width: 30vw;
+    height: 40vh
 }
 
 .HUD {
-    max-width: 300px;
+    width: 100%;
 }
 
 .TabPanel {
     overflow: scroll;
     max-height: 300px;
+}
+
+.cityMap {
+    position: fixed;
+    left: 0;
+    width: 70vw;
+    height: 70vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 4px;
+    border: 1px solid black;
+    overflow: scroll;
 }
 
 .cityHallSVG {
@@ -22,10 +37,12 @@
 .internalBuildingContainer {
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .internalBuildingSVG {
     cursor: pointer;
     max-width: 60px;
     max-height: 60px;
+    margin: 10px;
 }
