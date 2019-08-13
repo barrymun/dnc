@@ -20,44 +20,33 @@ class CityMap extends React.Component {
             buildings,
         } = this.props;
 
-        let cityHall = {}, cityWall = {};
+        let required = buildings.required;
+        let optional = buildings.optional;
 
-        let remainingBuildings = buildings
-            .map(building => {
-                if (building.name === internalBuildingNames.CITY_HALL) {
-                    cityHall = building;
-                    return null;
-                }
-
-                if (building.name === internalBuildingNames.CITY_WALL) {
-                    cityWall = building;
-                    return null;
-                }
-
-                return building;
-            })
-            .filter(o => o != null);
+        let cityHall = required.filter(o => o.name === internalBuildingNames.CITY_HALL)[0];
+        let cityWall = required.filter(o => o.name === internalBuildingNames.CITY_WALL)[0];
 
         // split into chunks for display
-        remainingBuildings = createChunks(remainingBuildings, 6);
+        optional = createChunks(optional, 6);
 
         return (
             <div className={'cityMap'}>
                 <CityHall cityHall={cityHall}/>
                 {
-                    remainingBuildings.map((chunk, index) => {
+                    optional.map((chunk, i) => {
                         return (
                             <div
-                                key={index}
+                                key={i}
                                 className={'internalBuildingContainer'}
                             >
                                 {
-                                    chunk.map((building, index) => {
+                                    chunk.map((building, j) => {
                                         return (
                                             <div
-                                                key={index}
+                                                key={j}
                                             >
                                                 <img
+                                                    onClick={() => console.log(i, j)}
                                                     alt={internalBuildingNames.SPACE}
                                                     src={building.src}
                                                     className={'internalBuildingSVG'}
@@ -78,7 +67,7 @@ class CityMap extends React.Component {
 CityMap.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
-    buildings: PropTypes.array.isRequired,
+    buildings: PropTypes.object.isRequired,
 };
 
 const c = connect()(withStyles(styles, {withTheme: true})(CityMap));

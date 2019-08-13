@@ -45,42 +45,57 @@ const defaultState = {
                 [troopNames.PUL]: 0,
             },
             buildings: {
-                internal: [
-                    {
-                        name: internalBuildingNames.CITY_HALL,
-                        level: 1,
-                        src: "city/internal/cityHall.png",
-                    },
-                    {
-                        name: internalBuildingNames.CITY_WALL,
-                        level: 1,
-                    },
-                    ...Array(24).fill(
+                internal: {
+                    required: [
                         {
-                            name: internalBuildingNames.SPACE,
+                            name: internalBuildingNames.CITY_HALL,
                             level: 1,
-                            src: "city/internal/space.png",
-                        }
-                    )
-                ],
-                external: [
-                    {
-                        name: externalBuildingConstants.FARM,
-                        level: 1,
-                    },
-                    {
-                        name: externalBuildingConstants.MILL,
-                        level: 1,
-                    },
-                    {
-                        name: externalBuildingConstants.QUARRY,
-                        level: 1,
-                    },
-                    {
-                        name: externalBuildingConstants.MINE,
-                        level: 1,
-                    },
-                ],
+                            src: "city/internal/cityHall.png",
+                        },
+                        {
+                            name: internalBuildingNames.CITY_WALL,
+                            level: 1,
+                        },
+                    ],
+                    optional: [
+                        ...Array(24).fill(
+                            {
+                                name: internalBuildingNames.SPACE,
+                                level: 1,
+                                src: "city/internal/space.png",
+                            }
+                        )
+                    ],
+                },
+                external: {
+                    required: [
+                        {
+                            name: externalBuildingConstants.FARM,
+                            level: 1,
+                        },
+                        {
+                            name: externalBuildingConstants.MILL,
+                            level: 1,
+                        },
+                        {
+                            name: externalBuildingConstants.QUARRY,
+                            level: 1,
+                        },
+                        {
+                            name: externalBuildingConstants.MINE,
+                            level: 1,
+                        },
+                    ],
+                    optional: [
+                        ...Array(24).fill(
+                            {
+                                name: internalBuildingNames.SPACE,
+                                level: 1,
+                                src: "city/internal/space.png",
+                            }
+                        )
+                    ],
+                },
             }
         }
     ],
