@@ -11,7 +11,6 @@ import TableBody from "@material-ui/core/TableBody";
 
 const styles = theme => ({
     root: {
-        marginTop: theme.spacing(3),
         overflowX: 'auto',
         maxWidth: 200,
     },

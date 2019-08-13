@@ -1,4 +1,14 @@
-.resourcesContainer {
-    display: flex;
-    align-items: center;
+.HUDContainer {
+    position: fixed;
+    top: 50px;
+    right: 0;
+}
+
+.HUD {
+    max-width: 300px;
+}
+
+.TabPanel {
+    overflow: scroll;
+    max-height: 300px;
 }

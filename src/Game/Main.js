@@ -7,17 +7,18 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import {sleep} from "../resources/utils.resources";
 import {
     Gold,
-    Resources,
-    Troops,
 } from "./components";
 import {
     troopNames,
-    resourceNames,
+    resourceNames, internalBuildingNames,
 } from "./constants";
+import {externalBuildingConstants} from "./constants/external.building.constants";
+import HUD from "./components/HUD";
 
 import './static/css/Main.css';
 
 const styles = theme => ({});
+const delay = 10;
 const defaultState = {
     cities: [
         {
@@ -41,6 +42,36 @@ const defaultState = {
                 [troopNames.RAM]: 0,
                 [troopNames.BAL]: 0,
                 [troopNames.PUL]: 0,
+            },
+            buildings: {
+                internal: [
+                    {
+                        name: internalBuildingNames.CITY_HALL,
+                        level: 1,
+                    },
+                    {
+                        name: internalBuildingNames.CITY_WALL,
+                        level: 1,
+                    },
+                ],
+                external: [
+                    {
+                        name: externalBuildingConstants.FARM,
+                        level: 1,
+                    },
+                    {
+                        name: externalBuildingConstants.MILL,
+                        level: 1,
+                    },
+                    {
+                        name: externalBuildingConstants.QUARRY,
+                        level: 1,
+                    },
+                    {
+                        name: externalBuildingConstants.MINE,
+                        level: 1,
+                    },
+                ],
             }
         }
     ],
@@ -94,14 +125,14 @@ class Main extends React.Component {
     async updateCitiesResources() {
         const {cities} = this.state;
 
-        await sleep(10);
+        await sleep(delay);
 
         let updatedCities = cities.map(city => {
             let {resources} = city;
             let updatedResources = Object.keys(resources).reduce((accumulator, resource) => {
                 return {
                     ...accumulator,
-                    [resource]: resources[resource] + this.getKingLevelBoost()
+                    [resource]: resources[resource] + (this.getKingLevelBoost() *  delay),
                 }
             }, {});
             return {
@@ -133,8 +164,12 @@ class Main extends React.Component {
         return (
             <div>
                 <Gold gold={gold}/>
-                <Resources resources={cities[currentCity].resources}/>
-                <Troops troops={cities[currentCity].troops}/>
+                <div className={'HUDContainer'}>
+                <HUD
+                    cities={cities}
+                    currentCity={currentCity}
+                />
+                </div>
             </div>
         );
     }
