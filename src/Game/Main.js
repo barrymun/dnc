@@ -9,6 +9,10 @@ import {
     Resources,
     Troops,
 } from "./components";
+import {
+    troopNames,
+    resourceNames,
+} from "./constants";
 
 import './static/css/Main.css';
 
@@ -19,23 +23,23 @@ const defaultState = {
             name: 'city',
             displayName: 'City',
             resources: {
-                food: 1000,
-                wood: 1000,
-                stone: 1000,
-                iron: 1000,
+                [resourceNames.FOOD]: 1000,
+                [resourceNames.WOOD]: 1000,
+                [resourceNames.STONE]: 1000,
+                [resourceNames.IRON]: 1000,
             },
             troops: {
-                transporter: 0,
-                warrior: 0,
-                scout: 0,
-                swordsman: 0,
-                pikeman: 0,
-                archer: 0,
-                cavalry: 0,
-                cataphract: 0,
-                batteringRam: 0,
-                ballista: 0,
-                catapult: 0,
+                [troopNames.TRS]: 0,
+                [troopNames.WAR]: 0,
+                [troopNames.SCT]: 0,
+                [troopNames.SWD]: 0,
+                [troopNames.PKE]: 0,
+                [troopNames.ARC]: 0,
+                [troopNames.CAV]: 0,
+                [troopNames.CAT]: 0,
+                [troopNames.RAM]: 0,
+                [troopNames.BAL]: 0,
+                [troopNames.PUL]: 0,
             }
         }
     ],
@@ -126,8 +130,8 @@ class Main extends React.Component {
 
         return (
             <div>
-            <Resources resources={cities[currentCity].resources}/>
-            <Troops troops={cities[currentCity].troops}/>
+                <Resources resources={cities[currentCity].resources}/>
+                <Troops troops={cities[currentCity].troops}/>
             </div>
         );
     }
