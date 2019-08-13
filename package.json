@@ -12,6 +12,7 @@
     "react-router-dom": "^5.0.1",
     "react-scripts": "3.0.1",
     "react-select": "^3.0.4",
+    "react-svg": "^10.0.17",
     "redux": "^4.0.4",
     "redux-thunk": "^2.3.0",
     "typeface-roboto": "0.0.75"

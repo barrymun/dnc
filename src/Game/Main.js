@@ -6,6 +6,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 
 import {sleep} from "../resources/utils.resources";
 import {
+    CityMap,
     Gold,
 } from "./components";
 import {
@@ -132,7 +133,7 @@ class Main extends React.Component {
             let updatedResources = Object.keys(resources).reduce((accumulator, resource) => {
                 return {
                     ...accumulator,
-                    [resource]: resources[resource] + (this.getKingLevelBoost() *  delay),
+                    [resource]: resources[resource] + (this.getKingLevelBoost() * delay),
                 }
             }, {});
             return {
@@ -164,11 +165,12 @@ class Main extends React.Component {
         return (
             <div>
                 <Gold gold={gold}/>
+                <CityMap buildings={cities[currentCity].buildings}/>
                 <div className={'HUDContainer'}>
-                <HUD
-                    cities={cities}
-                    currentCity={currentCity}
-                />
+                    <HUD
+                        cities={cities}
+                        currentCity={currentCity}
+                    />
                 </div>
             </div>
         );

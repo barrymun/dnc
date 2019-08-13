@@ -1,15 +1,15 @@
 import React from "react";
 import {connect} from "react-redux";
 import PropTypes from "prop-types";
+import ReactSVG from 'react-svg';
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
+import {internalBuildingNames} from "../constants";
+
+import '../static/css/Main.css';
+
 const styles = theme => ({
-    root: {
-        marginTop: theme.spacing(3),
-        overflowX: 'auto',
-        maxWidth: 200,
-    },
 });
 
 class CityHall extends React.Component {
@@ -18,12 +18,15 @@ class CityHall extends React.Component {
     render() {
         const {
             classes,
-            level,
+            cityHall,
         } = this.props;
 
         return (
             <div>
-                City Hall
+                <ReactSVG
+                    src="city/internal/cityHall.svg"
+                    className={'cityHallSVG'}
+                />
             </div>
         );
     }
@@ -32,7 +35,7 @@ class CityHall extends React.Component {
 CityHall.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
-    level: PropTypes.number.isRequired,
+    [internalBuildingNames.CITY_HALL]: PropTypes.object.isRequired,
 };
 
 const c = connect()(withStyles(styles, {withTheme: true})(CityHall));
