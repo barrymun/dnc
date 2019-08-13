@@ -5,7 +5,10 @@ import PropTypes from "prop-types";
 import withStyles from "@material-ui/core/styles/withStyles";
 
 import {sleep} from "../resources/utils.resources";
-import {Resources} from "./components";
+import {
+    Resources,
+    Troops,
+} from "./components";
 
 import './static/css/Main.css';
 
@@ -122,7 +125,10 @@ class Main extends React.Component {
         const {cities, currentCity} = this.state;
 
         return (
+            <div>
             <Resources resources={cities[currentCity].resources}/>
+            <Troops troops={cities[currentCity].troops}/>
+            </div>
         );
     }
 }
