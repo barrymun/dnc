@@ -220,7 +220,7 @@ class Main extends React.Component {
                 <Gold gold={gold}/>
                 <CityMap
                     buildings={cities[currentCity].buildings.internal}
-                    buildInternal={this.buildInternal}
+                    build={this.buildInternal}
                 />
                 <div className={'HUDContainer'}>
                     <HUD

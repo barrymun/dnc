@@ -16,12 +16,20 @@ import '../static/css/Main.css';
 const styles = theme => ({});
 
 class CityMap extends React.Component {
-    state = {};
+    state = {
+        xPos: null,
+        yPos: null,
+    };
+
+    setPosition = async (xPos, yPos) => {
+        return new Promise(resolve =>
+            this.setState({xPos, yPos}, resolve));
+    };
 
     render() {
         const {
             buildings,
-            buildInternal,
+            build,
         } = this.props;
 
         let required = buildings.required;
@@ -48,7 +56,8 @@ class CityMap extends React.Component {
                                         <Space
                                             key={j}
                                             building={building}
-                                            onClick={() => buildInternal(i, j, internalBuildingNames.BARRACKS)}
+                                            onClick={async () => await this.setPosition(i, j)}
+                                            build={build}
                                         />
                                     );
                                 else
@@ -68,7 +77,7 @@ CityMap.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
     buildings: PropTypes.object.isRequired,
-    buildInternal: PropTypes.func.isRequired,
+    build: PropTypes.func.isRequired,
 };
 
 const c = connect()(withStyles(styles, {withTheme: true})(CityMap));
