@@ -4,7 +4,10 @@ import PropTypes from "prop-types";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
-import {CityHall} from "./CityHall";
+import {
+    CityHall,
+    Space,
+} from "./";
 import {internalBuildingNames} from "../constants";
 import {createChunks} from "../../resources/utils.resources";
 
@@ -39,16 +42,16 @@ class CityMap extends React.Component {
                             className={'internalBuildingContainer'}
                         >
                             {chunk.map((building, j) => {
-                                return (
-                                    <div key={j}>
-                                        <img
-                                            onClick={() => console.log(i, j)}
-                                            alt={internalBuildingNames.SPACE}
-                                            src={building.src}
-                                            className={'internalBuildingSVG'}
+                                if (building.name === internalBuildingNames.SPACE)
+                                    return (
+                                        <Space
+                                            key={j}
+                                            building={building}
+                                            onClick={() => console.log({i, j})}
                                         />
-                                    </div>
-                                );
+                                    );
+                                else
+                                    return null
                             })}
                         </div>
                     );
