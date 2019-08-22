@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
+import {CityHallStatus} from "../components";
 import {internalBuildingNames} from "../constants";
 
 import '../static/css/Main.css';
@@ -12,20 +13,34 @@ const styles = theme => ({
 });
 
 class CityHall extends React.Component {
-    state = {};
+    state = {
+        cityHallStatusOpen: false,
+    };
+
+    toggleCityHallStatusOpen = () => {
+        this.setState(prevState => ({cityHallStatusOpen: !prevState.cityHallStatusOpen}));
+    };
 
     render() {
         const {
             cityHall,
         } = this.props;
 
+        const {
+            cityHallStatusOpen,
+        } = this.state;
+
         return (
             <div>
                 <img
-                    onClick={() => console.log('CLICKED')}
+                    onClick={this.toggleCityHallStatusOpen}
                     alt={internalBuildingNames.CITY_HALL}
                     src={cityHall.src}
                     className={'cityHallSVG'}
+                />
+                <CityHallStatus
+                    open={cityHallStatusOpen}
+                    toggleOpen={this.toggleCityHallStatusOpen}
                 />
             </div>
         );

@@ -32,33 +32,27 @@ class CityMap extends React.Component {
         return (
             <div className={'cityMap'}>
                 <CityHall cityHall={cityHall}/>
-                {
-                    optional.map((chunk, i) => {
-                        return (
-                            <div
-                                key={i}
-                                className={'internalBuildingContainer'}
-                            >
-                                {
-                                    chunk.map((building, j) => {
-                                        return (
-                                            <div
-                                                key={j}
-                                            >
-                                                <img
-                                                    onClick={() => console.log(i, j)}
-                                                    alt={internalBuildingNames.SPACE}
-                                                    src={building.src}
-                                                    className={'internalBuildingSVG'}
-                                                />
-                                            </div>
-                                        );
-                                    })
-                                }
-                            </div>
-                        );
-                    })
-                }
+                {optional.map((chunk, i) => {
+                    return (
+                        <div
+                            key={i}
+                            className={'internalBuildingContainer'}
+                        >
+                            {chunk.map((building, j) => {
+                                return (
+                                    <div key={j}>
+                                        <img
+                                            onClick={() => console.log(i, j)}
+                                            alt={internalBuildingNames.SPACE}
+                                            src={building.src}
+                                            className={'internalBuildingSVG'}
+                                        />
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    );
+                })}
             </div>
         );
     }
