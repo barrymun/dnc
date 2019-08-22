@@ -91,7 +91,7 @@ const defaultState = {
                             {
                                 name: internalBuildingNames.SPACE,
                                 level: 1,
-                                src: "city/internal/space.png",
+                                src: `city/internal/space.png`,
                             }
                         )
                     ],
@@ -170,6 +170,36 @@ class Main extends React.Component {
         await this.updateCitiesResources();
     }
 
+    buildInternal = async (i, j, name) => {
+        const {cities, currentCity} = this.state;
+        let optionalBuildingArray = cities[currentCity].buildings.internal.optional;
+        let chunkSize = 6;
+        let index = (i * chunkSize) + j;
+
+        optionalBuildingArray[index] = {
+            name,
+            level: 1,
+            src: `city/internal/${name}.png`
+        };
+
+        return this.setStateAsync(prevState => ({
+            cities: [
+                ...prevState.cities.slice(0, prevState.currentCity),
+                {
+                    ...prevState.cities[prevState.currentCity],
+                    buildings: {
+                        ...prevState.cities[prevState.currentCity].buildings,
+                        internal: {
+                            ...prevState.cities[prevState.currentCity].buildings.internal,
+                            optional: optionalBuildingArray,
+                        }
+                    }
+                },
+                ...prevState.cities.slice(prevState.currentCity + 1),
+            ],
+        }));
+    };
+
     getKingLevelBoost = () => {
         const {king} = this.state;
         return king.level * this.getArmorLevelBoost();
@@ -188,7 +218,10 @@ class Main extends React.Component {
         return (
             <div>
                 <Gold gold={gold}/>
-                <CityMap buildings={cities[currentCity].buildings.internal}/>
+                <CityMap
+                    buildings={cities[currentCity].buildings.internal}
+                    buildInternal={this.buildInternal}
+                />
                 <div className={'HUDContainer'}>
                     <HUD
                         cities={cities}

@@ -21,6 +21,7 @@ class CityMap extends React.Component {
     render() {
         const {
             buildings,
+            buildInternal,
         } = this.props;
 
         let required = buildings.required;
@@ -47,11 +48,13 @@ class CityMap extends React.Component {
                                         <Space
                                             key={j}
                                             building={building}
-                                            onClick={() => console.log({i, j})}
+                                            onClick={() => buildInternal(i, j, internalBuildingNames.BARRACKS)}
                                         />
                                     );
                                 else
-                                    return null
+                                    return (
+                                        <div key={j}>null</div>
+                                    )
                             })}
                         </div>
                     );
@@ -65,6 +68,7 @@ CityMap.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
     buildings: PropTypes.object.isRequired,
+    buildInternal: PropTypes.func.isRequired,
 };
 
 const c = connect()(withStyles(styles, {withTheme: true})(CityMap));
