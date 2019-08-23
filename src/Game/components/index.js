@@ -5,3 +5,4 @@ export * from './CityHall';
 export * from './CityHallStatus';
 export * from './CityMap';
 export * from './buildings/internal/';
+export * from './Alert';

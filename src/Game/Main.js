@@ -9,12 +9,15 @@ import {
     CityMap,
     Gold,
 } from "./components";
+import Alert from "./components/Alert";
+import HUD from "./components/HUD";
 import {
     troopNames,
     resourceNames, internalBuildingNames,
 } from "./constants";
-import {externalBuildingConstants} from "./constants/external.building.constants";
-import HUD from "./components/HUD";
+import {
+    externalBuildingConstants,
+} from "./constants/external.building.constants";
 
 import './static/css/Main.css';
 
@@ -125,6 +128,8 @@ const defaultState = {
         },
     },
     gold: 10000,
+    alertOpen: false,
+    alertMessage: '',
 };
 
 class Main extends React.Component {
@@ -174,7 +179,7 @@ class Main extends React.Component {
     /**
      * don't set the state if one of the initial checks fail
      * this will prevent open dialogs from closing in situations where we do not want them to close
-     * 
+     *
      * @param i
      * @param j
      * @param name
@@ -185,7 +190,13 @@ class Main extends React.Component {
         if (i == null || j == null || name == null) return Promise.resolve();
 
         // check if it is permitted to build this building
-        if (!this.canBuildInternal(name)) return Promise.resolve();
+        if (!this.canBuildInternal(name)) {
+            await this.setStateAsync({
+                alertOpen: true,
+                alertMessage: `There can only be one ${name}`,
+            });
+            return Promise.resolve();
+        }
 
         const {cities, currentCity} = this.state;
         let optionalBuildingArray = cities[currentCity].buildings.internal.optional;
@@ -245,6 +256,7 @@ class Main extends React.Component {
         return king.level * this.getArmorLevelBoost();
     };
 
+
     getArmorLevelBoost = () => {
         const {armor} = this.state;
         let boost = 0;
@@ -252,11 +264,31 @@ class Main extends React.Component {
         return boost;
     };
 
+
+    /**
+     * close the alert snackbar
+     */
+    closeAlert = () => {
+        return this.setStateAsync({alertOpen: false, alertMessage: ``});
+    };
+
+
     render() {
-        const {cities, currentCity, gold} = this.state;
+        const {
+            gold,
+            cities,
+            currentCity,
+            alertOpen,
+            alertMessage,
+        } = this.state;
 
         return (
             <div>
+                <Alert
+                    open={alertOpen}
+                    message={alertMessage}
+                    handleClose={this.closeAlert}
+                />
                 <Gold gold={gold}/>
                 <CityMap
                     buildings={cities[currentCity].buildings.internal}
