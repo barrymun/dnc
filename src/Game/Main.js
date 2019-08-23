@@ -171,6 +171,8 @@ class Main extends React.Component {
     }
 
     buildInternal = async (i, j, name) => {
+        if (i == null || j == null || name == null) return;
+
         const {cities, currentCity} = this.state;
         let optionalBuildingArray = cities[currentCity].buildings.internal.optional;
         let chunkSize = 6;

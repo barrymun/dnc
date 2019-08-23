@@ -29,6 +29,7 @@ class Space extends React.Component {
         const {
             building,
             onClick,
+            build,
         } = this.props;
 
         const {open} = this.state;
@@ -59,10 +60,13 @@ class Space extends React.Component {
                         </DialogContentText>
 
                         <div className={`buildingSelection`}>
-                            <div className={`buildItem`}>
+                            <div
+                                className={`buildItem`}
+                                onClick={() => build(internalBuildingNames.COMMAND_CENTRE)}
+                            >
                                 <img
                                     alt={internalBuildingNames.COMMAND_CENTRE}
-                                    src={`city/internal/space.png`}
+                                    src={`city/internal/${internalBuildingNames.COMMAND_CENTRE}.png`}
                                     className={'internalBuildingSVG'}
                                 />
                                 <div>
@@ -70,10 +74,13 @@ class Space extends React.Component {
                                 </div>
                             </div>
 
-                            <div className={`buildItem`}>
+                            <div
+                                className={`buildItem`}
+                                onClick={() => build(internalBuildingNames.WATCHTOWER)}
+                            >
                                 <img
                                     alt={internalBuildingNames.WATCHTOWER}
-                                    src={`city/internal/space.png`}
+                                    src={`city/internal/${internalBuildingNames.WATCHTOWER}.png`}
                                     className={'internalBuildingSVG'}
                                 />
                                 <div>
@@ -81,10 +88,13 @@ class Space extends React.Component {
                                 </div>
                             </div>
 
-                            <div className={`buildItem`}>
+                            <div
+                                className={`buildItem`}
+                                onClick={() => build(internalBuildingNames.STABLE)}
+                            >
                                 <img
                                     alt={internalBuildingNames.STABLE}
-                                    src={`city/internal/space.png`}
+                                    src={`city/internal/${internalBuildingNames.STABLE}.png`}
                                     className={'internalBuildingSVG'}
                                 />
                                 <div>
@@ -92,10 +102,13 @@ class Space extends React.Component {
                                 </div>
                             </div>
 
-                            <div className={`buildItem`}>
+                            <div
+                                className={`buildItem`}
+                                onClick={() => build(internalBuildingNames.MARKETPLACE)}
+                            >
                                 <img
                                     alt={internalBuildingNames.MARKETPLACE}
-                                    src={`city/internal/space.png`}
+                                    src={`city/internal/${internalBuildingNames.MARKETPLACE}.png`}
                                     className={'internalBuildingSVG'}
                                 />
                                 <div>
@@ -103,10 +116,13 @@ class Space extends React.Component {
                                 </div>
                             </div>
 
-                            <div className={`buildItem`}>
+                            <div
+                                className={`buildItem`}
+                                onClick={() => build(internalBuildingNames.COLLEGE)}
+                            >
                                 <img
                                     alt={internalBuildingNames.COLLEGE}
-                                    src={`city/internal/space.png`}
+                                    src={`city/internal/${internalBuildingNames.COLLEGE}.png`}
                                     className={'internalBuildingSVG'}
                                 />
                                 <div>
@@ -114,10 +130,13 @@ class Space extends React.Component {
                                 </div>
                             </div>
 
-                            <div className={`buildItem`}>
+                            <div
+                                className={`buildItem`}
+                                onClick={() => build(internalBuildingNames.WORKSHOP)}
+                            >
                                 <img
                                     alt={internalBuildingNames.WORKSHOP}
-                                    src={`city/internal/space.png`}
+                                    src={`city/internal/${internalBuildingNames.WORKSHOP}.png`}
                                     className={'internalBuildingSVG'}
                                 />
                                 <div>
@@ -125,10 +144,13 @@ class Space extends React.Component {
                                 </div>
                             </div>
 
-                            <div className={`buildItem`}>
+                            <div
+                                className={`buildItem`}
+                                onClick={() => build(internalBuildingNames.BARRACKS)}
+                            >
                                 <img
                                     alt={internalBuildingNames.BARRACKS}
-                                    src={`city/internal/space.png`}
+                                    src={`city/internal/${internalBuildingNames.BARRACKS}.png`}
                                     className={'internalBuildingSVG'}
                                 />
                                 <div>
@@ -136,10 +158,13 @@ class Space extends React.Component {
                                 </div>
                             </div>
 
-                            <div className={`buildItem`}>
+                            <div
+                                className={`buildItem`}
+                                onClick={() => build(internalBuildingNames.COTTAGE)}
+                            >
                                 <img
                                     alt={internalBuildingNames.COTTAGE}
-                                    src={`city/internal/space.png`}
+                                    src={`city/internal/${internalBuildingNames.COTTAGE}.png`}
                                     className={'internalBuildingSVG'}
                                 />
                                 <div>

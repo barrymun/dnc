@@ -7,6 +7,7 @@ import withStyles from "@material-ui/core/styles/withStyles";
 import {
     CityHall,
     Space,
+    CommandCentre,
 } from "./";
 import {internalBuildingNames} from "../constants";
 import {createChunks} from "../../resources/utils.resources";
@@ -26,10 +27,14 @@ class CityMap extends React.Component {
             this.setState({xPos, yPos}, resolve));
     };
 
+    build = async name => {
+        const {xPos, yPos} = this.state;
+        return this.props.build(xPos, yPos, name);
+    };
+
     render() {
         const {
             buildings,
-            build,
         } = this.props;
 
         let required = buildings.required;
@@ -57,9 +62,24 @@ class CityMap extends React.Component {
                                             key={j}
                                             building={building}
                                             onClick={async () => await this.setPosition(i, j)}
-                                            build={build}
+                                            build={this.build}
                                         />
                                     );
+                                if (building.name === internalBuildingNames.COMMAND_CENTRE)
+                                    return (
+                                        <CommandCentre
+                                            key={j}
+                                            building={building}
+                                            onClick={async () => await this.setPosition(i, j)}
+                                        />
+                                    );
+                                // if (building.name === internalBuildingNames.WATCHTOWER)
+                                // if (building.name === internalBuildingNames.STABLE)
+                                // if (building.name === internalBuildingNames.MARKETPLACE)
+                                // if (building.name === internalBuildingNames.COLLEGE)
+                                // if (building.name === internalBuildingNames.WORKSHOP)
+                                // if (building.name === internalBuildingNames.BARRACKS)
+                                // if (building.name === internalBuildingNames.COTTAGE)
                                 else
                                     return (
                                         <div key={j}>null</div>
