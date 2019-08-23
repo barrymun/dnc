@@ -170,8 +170,22 @@ class Main extends React.Component {
         await this.updateCitiesResources();
     }
 
+
+    /**
+     * don't set the state if one of the initial checks fail
+     * this will prevent open dialogs from closing in situations where we do not want them to close
+     * 
+     * @param i
+     * @param j
+     * @param name
+     * @returns {Promise<void>}
+     */
     buildInternal = async (i, j, name) => {
-        if (i == null || j == null || name == null) return;
+        // check for null values
+        if (i == null || j == null || name == null) return Promise.resolve();
+
+        // check if it is permitted to build this building
+        if (!this.canBuildInternal(name)) return Promise.resolve();
 
         const {cities, currentCity} = this.state;
         let optionalBuildingArray = cities[currentCity].buildings.internal.optional;
@@ -201,6 +215,30 @@ class Main extends React.Component {
             ],
         }));
     };
+
+
+    /**
+     * * used to check how many of each optional building type are permitted
+     * (for internal buildings)
+     * for example, there can only be 1 workshop, but many cottages can exist
+     *
+     * @param name
+     */
+    canBuildInternal = name => {
+        const {cities, currentCity} = this.state;
+        const limited = [
+            internalBuildingNames.COMMAND_CENTRE,
+            internalBuildingNames.WATCHTOWER,
+            internalBuildingNames.STABLE,
+            internalBuildingNames.MARKETPLACE,
+            internalBuildingNames.COLLEGE,
+            internalBuildingNames.WORKSHOP,
+        ];
+
+        return !cities[currentCity].buildings.internal.optional
+            .some(o => o.name === name && limited.includes(name));
+    };
+
 
     getKingLevelBoost = () => {
         const {king} = this.state;
