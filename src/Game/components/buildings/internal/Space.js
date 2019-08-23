@@ -59,7 +59,7 @@ class Space extends React.Component {
                         <DialogContentText>
                         </DialogContentText>
 
-                        <div className={`buildingSelection`}>
+                        <div className={`dialogSelection`}>
                             <div
                                 className={`buildItem`}
                                 onClick={() => build(internalBuildingNames.COMMAND_CENTRE)}

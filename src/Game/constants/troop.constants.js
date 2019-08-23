@@ -12,6 +12,21 @@ export const troopNames = {
     CATAPULT: `catapult`,
 };
 
+
+export const troops = [
+    troopNames.TRANSPORTER,
+    troopNames.WARRIOR,
+    troopNames.SCOUT,
+    troopNames.SWORDSMAN,
+    troopNames.PIKEMAN,
+    troopNames.ARCHER,
+    troopNames.CAVALRY,
+    troopNames.CATAPHRACT,
+    troopNames.RAM,
+    troopNames.BALLISTA,
+    troopNames.CATAPULT,
+];
+
 /**
  * in seconds
  *
