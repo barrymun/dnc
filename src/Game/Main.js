@@ -50,7 +50,7 @@ const defaultState = {
                         {
                             name: internalBuildingNames.CITY_HALL,
                             level: 1,
-                            src: "city/internal/cityHall.png",
+                            src: `city/internal/cityHall.png`,
                         },
                         {
                             name: internalBuildingNames.CITY_WALL,
@@ -62,7 +62,7 @@ const defaultState = {
                             {
                                 name: internalBuildingNames.SPACE,
                                 level: 1,
-                                src: "city/internal/space.png",
+                                src: `city/internal/space.png`,
                             }
                         )
                     ],
