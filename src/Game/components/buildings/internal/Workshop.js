@@ -10,7 +10,7 @@ import '../../../static/css/Main.css';
 
 const styles = theme => ({});
 
-class CommandCentre extends React.Component {
+class Workshop extends React.Component {
     state = {
     };
 
@@ -24,7 +24,7 @@ class CommandCentre extends React.Component {
             <div>
                 <div onClick={onClick}>
                     <img
-                        alt={internalBuildingNames.COMMAND_CENTRE}
+                        alt={internalBuildingNames.WORKSHOP}
                         src={building.src}
                         className={'internalBuildingSVG'}
                     />
@@ -34,12 +34,12 @@ class CommandCentre extends React.Component {
     }
 }
 
-CommandCentre.propTypes = {
+Workshop.propTypes = {
     classes: PropTypes.object.isRequired,
     theme: PropTypes.object.isRequired,
     building: PropTypes.object.isRequired,
     onClick: PropTypes.func.isRequired,
 };
 
-const c = connect()(withStyles(styles, {withTheme: true})(CommandCentre));
-export {c as CommandCentre};
+const c = connect()(withStyles(styles, {withTheme: true})(Workshop));
+export {c as Workshop};

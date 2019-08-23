@@ -4,5 +4,4 @@ export * from './Gold';
 export * from './CityHall';
 export * from './CityHallStatus';
 export * from './CityMap';
-export * from './buildings/internal/Space';
-export * from './buildings/internal/CommandCentre';
+export * from './buildings/internal/';

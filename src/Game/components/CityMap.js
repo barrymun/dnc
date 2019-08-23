@@ -8,6 +8,13 @@ import {
     CityHall,
     Space,
     CommandCentre,
+    Barracks,
+    College,
+    Cottage,
+    Marketplace,
+    Stable,
+    Watchtower,
+    Workshop
 } from "./";
 import {internalBuildingNames} from "../constants";
 import {createChunks} from "../../resources/utils.resources";
@@ -73,13 +80,62 @@ class CityMap extends React.Component {
                                             onClick={async () => await this.setPosition(i, j)}
                                         />
                                     );
-                                // if (building.name === internalBuildingNames.WATCHTOWER)
-                                // if (building.name === internalBuildingNames.STABLE)
-                                // if (building.name === internalBuildingNames.MARKETPLACE)
-                                // if (building.name === internalBuildingNames.COLLEGE)
-                                // if (building.name === internalBuildingNames.WORKSHOP)
-                                // if (building.name === internalBuildingNames.BARRACKS)
-                                // if (building.name === internalBuildingNames.COTTAGE)
+                                if (building.name === internalBuildingNames.WATCHTOWER)
+                                    return (
+                                        <Watchtower
+                                            key={j}
+                                            building={building}
+                                            onClick={async () => await this.setPosition(i, j)}
+                                        />
+                                    );
+                                if (building.name === internalBuildingNames.STABLE)
+                                    return (
+                                        <Stable
+                                            key={j}
+                                            building={building}
+                                            onClick={async () => await this.setPosition(i, j)}
+                                        />
+                                    );
+                                if (building.name === internalBuildingNames.MARKETPLACE)
+                                    return (
+                                        <Marketplace
+                                            key={j}
+                                            building={building}
+                                            onClick={async () => await this.setPosition(i, j)}
+                                        />
+                                    );
+                                if (building.name === internalBuildingNames.COLLEGE)
+                                    return (
+                                        <College
+                                            key={j}
+                                            building={building}
+                                            onClick={async () => await this.setPosition(i, j)}
+                                        />
+                                    );
+                                if (building.name === internalBuildingNames.WORKSHOP)
+                                    return (
+                                        <Workshop
+                                            key={j}
+                                            building={building}
+                                            onClick={async () => await this.setPosition(i, j)}
+                                        />
+                                    );
+                                if (building.name === internalBuildingNames.BARRACKS)
+                                    return (
+                                        <Barracks
+                                            key={j}
+                                            building={building}
+                                            onClick={async () => await this.setPosition(i, j)}
+                                        />
+                                    );
+                                if (building.name === internalBuildingNames.COTTAGE)
+                                    return (
+                                        <Cottage
+                                            key={j}
+                                            building={building}
+                                            onClick={async () => await this.setPosition(i, j)}
+                                        />
+                                    );
                                 else
                                     return (
                                         <div key={j}>null</div>
