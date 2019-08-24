@@ -19,10 +19,19 @@ const styles = theme => ({});
 class Barracks extends React.Component {
     state = {
         open: false,
+        amountOpen: false,
+        name: '',
     };
 
     toggleOpen = () => {
         this.setState(prevState => ({open: !prevState.open}));
+    };
+
+    toggleAmountOpen = name => {
+        this.setState(prevState => ({
+            name: name != null ? name : ``,
+            amountOpen: !prevState.amountOpen,
+        }));
     };
 
     render() {
@@ -31,7 +40,11 @@ class Barracks extends React.Component {
             onClick,
         } = this.props;
 
-        const {open} = this.state;
+        const {
+            open,
+            amountOpen,
+            name,
+        } = this.state;
 
         return (
             <div>
@@ -64,6 +77,7 @@ class Barracks extends React.Component {
                                     <div
                                         key={index}
                                         className={`troopItem`}
+                                        onClick={() => this.toggleAmountOpen(t)}
                                     >
                                         <img
                                             alt={t}
@@ -83,6 +97,32 @@ class Barracks extends React.Component {
                         <Button
                             color="secondary"
                             onClick={this.toggleOpen}
+                        >
+                            Cancel
+                        </Button>
+                    </DialogActions>
+                </Dialog>
+
+                <Dialog
+                    open={amountOpen}
+                    onClose={() => this.toggleAmountOpen(null)}
+                >
+                    <DialogTitle>
+                        How many {name}'s should be trained?
+                    </DialogTitle>
+
+                    <DialogContent>
+                        <DialogContentText>
+                        </DialogContentText>
+
+                        HERE
+
+                    </DialogContent>
+
+                    <DialogActions>
+                        <Button
+                            color="secondary"
+                            onClick={() => this.toggleAmountOpen(null)}
                         >
                             Cancel
                         </Button>
