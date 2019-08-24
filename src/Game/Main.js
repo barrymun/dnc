@@ -270,7 +270,15 @@ class Main extends React.Component {
     };
 
 
-    train = () => {
+    /**
+     * train troops
+     * subtract the correct resources from the player
+     *
+     * @param name
+     * @param amount
+     */
+    train = (name, amount) => {
+        console.log('train')
     };
 
 
@@ -302,6 +310,7 @@ class Main extends React.Component {
                 <CityMap
                     city={cities[currentCity]}
                     build={this.buildInternal}
+                    train={this.train}
                 />
                 <div className={'HUDContainer'}>
                     <HUD

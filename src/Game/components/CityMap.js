@@ -29,19 +29,23 @@ class CityMap extends React.Component {
         yPos: null,
     };
 
+
     setPosition = async (xPos, yPos) => {
         return new Promise(resolve =>
             this.setState({xPos, yPos}, resolve));
     };
+
 
     build = async name => {
         const {xPos, yPos} = this.state;
         return this.props.build(xPos, yPos, name);
     };
 
+
     render() {
         const {
             city,
+            train,
         } = this.props;
 
         let required = city.buildings.internal.required;
@@ -126,6 +130,7 @@ class CityMap extends React.Component {
                                             key={j}
                                             building={building}
                                             onClick={async () => await this.setPosition(i, j)}
+                                            train={train}
                                         />
                                     );
                                 if (building.name === internalBuildingNames.COTTAGE)
@@ -154,6 +159,7 @@ CityMap.propTypes = {
     theme: PropTypes.object.isRequired,
     city: PropTypes.object.isRequired,
     build: PropTypes.func.isRequired,
+    train: PropTypes.func.isRequired,
 };
 
 const c = connect()(withStyles(styles, {withTheme: true})(CityMap));

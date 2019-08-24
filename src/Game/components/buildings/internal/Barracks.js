@@ -9,6 +9,7 @@ import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogActions from "@material-ui/core/DialogActions";
 import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
 
 import {internalBuildingNames, troops, troopTrainingTimes} from "../../../constants";
 
@@ -21,18 +22,38 @@ class Barracks extends React.Component {
         open: false,
         amountOpen: false,
         name: '',
+        amount: 0,
     };
+
 
     toggleOpen = () => {
         this.setState(prevState => ({open: !prevState.open}));
     };
 
+
     toggleAmountOpen = name => {
         this.setState(prevState => ({
             name: name != null ? name : ``,
             amountOpen: !prevState.amountOpen,
+            amount: 0,
         }));
     };
+
+
+    handleChange = name => event => {
+        const value = event.target.value;
+
+        if (isNaN(value)) return;
+
+        this.setState({[name]: value});
+    };
+
+
+    train = () => {
+        const {name, amount} = this.state;
+        this.props.train(name, amount);
+    };
+
 
     render() {
         const {
@@ -44,6 +65,7 @@ class Barracks extends React.Component {
             open,
             amountOpen,
             name,
+            amount,
         } = this.state;
 
         return (
@@ -115,7 +137,19 @@ class Barracks extends React.Component {
                         <DialogContentText>
                         </DialogContentText>
 
-                        HERE
+                        <TextField
+                            autoFocus
+                            fullWidth
+                            label="Amount"
+                            value={amount}
+                            onChange={this.handleChange('amount')}
+                            type="text"
+                            margin="normal"
+                            className={``}
+                            InputLabelProps={{
+                                shrink: true,
+                            }}
+                        />
 
                     </DialogContent>
 
@@ -125,6 +159,12 @@ class Barracks extends React.Component {
                             onClick={() => this.toggleAmountOpen(null)}
                         >
                             Cancel
+                        </Button>
+                        <Button
+                            color="primary"
+                            onClick={this.train}
+                        >
+                            Train
                         </Button>
                     </DialogActions>
                 </Dialog>
@@ -138,6 +178,7 @@ Barracks.propTypes = {
     theme: PropTypes.object.isRequired,
     building: PropTypes.object.isRequired,
     onClick: PropTypes.func.isRequired,
+    train: PropTypes.func.isRequired,
 };
 
 const c = connect()(withStyles(styles, {withTheme: true})(Barracks));
