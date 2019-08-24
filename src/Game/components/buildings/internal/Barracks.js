@@ -61,8 +61,15 @@ class Barracks extends React.Component {
                         <div className={`dialogSelection`}>
                             {troops.map((t, index) => {
                                 return (
-                                    <div key={index}>
-                                        <div>img</div>
+                                    <div
+                                        key={index}
+                                        className={`troopItem`}
+                                    >
+                                        <img
+                                            alt={t}
+                                            src={`troops/${t}.png`}
+                                            className={`troopSvg`}
+                                        />
                                         <div>{t}</div>
                                         <div>Time: {troopTrainingTimes[t]}</div>
                                     </div>
