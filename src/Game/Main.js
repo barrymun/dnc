@@ -257,11 +257,20 @@ class Main extends React.Component {
     };
 
 
+    /**
+     * current armor level can increase resource production & decrease troop training time
+     *
+     * @returns {number}
+     */
     getArmorLevelBoost = () => {
         const {armor} = this.state;
         let boost = 0;
         Object.keys(armor).map((key, index) => boost += armor[key].level);
         return boost;
+    };
+
+
+    train = () => {
     };
 
 
@@ -291,7 +300,7 @@ class Main extends React.Component {
                 />
                 <Gold gold={gold}/>
                 <CityMap
-                    buildings={cities[currentCity].buildings.internal}
+                    city={cities[currentCity]}
                     build={this.buildInternal}
                 />
                 <div className={'HUDContainer'}>
