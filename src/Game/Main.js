@@ -152,9 +152,13 @@ class Main extends React.Component {
     }
 
     async updateCitiesResources() {
-        const {cities} = this.state;
 
+        // sleep must appear at the top of this method
+        // otherwise variables/constants could be changed elsewhere during the sleep period
+        // but not reflected here
         await sleep(delay);
+
+        const {cities} = this.state;
 
         let updatedCities = cities.map(city => {
             let {resources} = city;
