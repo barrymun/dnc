@@ -13,7 +13,7 @@ import Alert from "./components/Alert";
 import HUD from "./components/HUD";
 import {
     troopNames,
-    resourceNames, internalBuildingNames,
+    resourceNames, internalBuildingNames, troopResourceCost,
 } from "./constants";
 import {
     externalBuildingConstants,
@@ -278,7 +278,44 @@ class Main extends React.Component {
      * @param amount
      */
     train = (name, amount) => {
-        console.log('train')
+        const {cities, currentCity} = this.state;
+
+        let cost = troopResourceCost[name];
+
+        let resourcesToBeConsumed = Object.keys(cost).reduce((accumulator, resource) => {
+            return {
+                ...accumulator,
+                [resource]: cost[resource] * amount,
+            }
+        }, {});
+
+        let enoughResources = !Object.keys(resourcesToBeConsumed)
+            .some((key, index) => resourcesToBeConsumed[key] > cities[currentCity].resources[key]);
+
+        if (!enoughResources) return this.setStateAsync({alertOpen: true, alertMessage: `Not enough resources`});
+
+        let updatedResources = Object.keys(resourcesToBeConsumed).reduce((accumulator, resource) => {
+            return {
+                ...accumulator,
+                [resource]: cities[currentCity].resources[resource] - resourcesToBeConsumed[resource],
+            }
+        }, {});
+        console.log({updatedResources})
+
+        return this.setStateAsync(prevState => ({
+            cities: [
+                ...prevState.cities.slice(0, prevState.currentCity),
+                {
+                    ...prevState.cities[prevState.currentCity],
+                    resources: updatedResources,
+                    troops: {
+                        ...prevState.cities[prevState.currentCity].troops,
+                        [name]: amount,
+                    }
+                },
+                ...prevState.cities.slice(prevState.currentCity + 1),
+            ],
+        }));
     };
 
 
