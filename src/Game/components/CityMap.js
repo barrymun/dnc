@@ -17,7 +17,7 @@ import {
     Workshop
 } from "./";
 import {internalBuildingNames} from "../constants";
-import {createChunks} from "../../resources/utils.resources";
+import {createChunks} from "../../_utils/utils.utils";
 
 import '../static/css/Main.css';
 

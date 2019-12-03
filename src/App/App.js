@@ -2,7 +2,7 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Router} from 'react-router-dom';
 
-import {history} from '../helpers';
+import {history} from '../_helpers';
 import homePublicRoutes from '../Home/routes/public.routes';
 import gamePublicRoutes from '../Game/routes/public.routes';
 

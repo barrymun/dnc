@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import withStyles from "@material-ui/core/styles/withStyles";
 
-import {sleep} from "../resources/utils.resources";
+import {sleep} from "../_utils/utils.utils";
 import {
     CityMap,
     Gold,
@@ -276,7 +276,7 @@ class Main extends React.Component {
 
     /**
      * train troops
-     * subtract the correct resources from the player
+     * subtract the correct _utils from the player
      *
      * @param name
      * @param amount
