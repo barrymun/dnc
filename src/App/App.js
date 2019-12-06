@@ -3,8 +3,8 @@ import {connect} from 'react-redux';
 import {Router} from 'react-router-dom';
 
 import {history} from '../_helpers';
-import homePublicRoutes from '../Home/routes/public.routes';
-import gamePublicRoutes from '../Game/routes/public.routes';
+import homePublicRoutes from '../Home/_routes/public.routes';
+import gamePublicRoutes from '../Game/_routes/public.routes';
 
 import './App.css';
 
