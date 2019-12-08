@@ -1,0 +1,34 @@
+.container {
+    display: flex;
+    flex-direction: column;
+}
+
+.map {
+    /*flex-grow: 1;*/
+    /*display: flex;*/
+    min-height: 75vh;
+    max-height: 75vh;
+    width: 100%;
+    box-sizing: border-box;
+    border: 1px solid black;
+    overflow: hidden;
+}
+
+.items-hud {
+    min-height: 25vh;
+    max-height: 25vh;
+    box-sizing: border-box;
+    border: 1px solid black;
+    /*min-width: 500px;*/
+    min-width: 50vw;
+    max-width: 50vw;
+}
+
+.tile-flat {
+    height: 80px;
+    width: 80px;
+    background-color: green;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 50%;
+}

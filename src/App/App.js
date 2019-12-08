@@ -19,5 +19,15 @@ class App extends React.Component {
     }
 }
 
-const c = connect()(App);
+const mapStateToProps = (state, ownProps) => {
+    const {
+        map,
+    } = state;
+
+    return {
+        map,
+    };
+};
+
+const c = connect(mapStateToProps)(App);
 export {c as App};
