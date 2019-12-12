@@ -61,6 +61,18 @@ class Main extends Base {
         this.map.removeEventListener('mousemove', this.mouseMove);
     }
 
+    getTileClassName = type => {
+        const base = `tile`;
+        switch (type) {
+            case 0:
+                return `${base} flat`;
+            case 1:
+                return `${base} player-city`;
+            default:
+                return `${base} flat`;
+        }
+    };
+
     render() {
         const {map} = this.props;
 
@@ -78,7 +90,7 @@ class Main extends Base {
                             {row.map((tile, index) => (
                                 <div
                                     key={index}
-                                    className={`tile`}
+                                    className={this.getTileClassName(tile.type)}
                                 />
                             ))}
                         </div>

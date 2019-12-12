@@ -18,6 +18,8 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+    cursor: all-scroll;
+    padding: 25vh 0;
 }
 
 .tile-container {
@@ -29,14 +31,25 @@
 
 .tile {
     display: inline-block;
-    margin: 10px;
-    height: 80px;
-    width: 80px;
-    background-color: green;
+    margin: 20px;
+    height: 100px;
+    width: 100px;
     box-sizing: border-box;
     border: 1px solid black;
     border-radius: 50%;
     cursor: pointer;
+}
+
+.tile:hover {
+    opacity: 0.8;
+}
+
+.flat {
+    background-color: green;
+}
+
+.player-city {
+    background-color: grey;
 }
 
 .hud-container {
