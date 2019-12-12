@@ -6,47 +6,59 @@ import '../static/css/map.css';
 class Main extends Base {
 
     map = null;
-    clicked = false;
-    clickY = null;
-    clickX = null;
+    isDown = false;
+    startX = null;
+    scrollLeft = null;
+    startY = null;
+    scrollTop = null;
 
     constructor(props) {
         super(props);
         this.map = React.createRef();
         this.mouseMove = this.mouseMove.bind(this);
         this.mouseDown = this.mouseDown.bind(this);
+        this.mouseLeave = this.mouseLeave.bind(this);
         this.mouseUp = this.mouseUp.bind(this);
     }
 
-    mouseMove(e) {
-        this.clicked && this.updateMapPos(e);
-    }
-
-    updateMapPos = e => {
-        this.map.scrollTop += parseInt((this.clickY - e.pageY) / 50);
-        this.map.scrollLeft += parseInt((this.clickX - e.pageX) / 50);
-    };
-
     mouseDown(e) {
-        this.clicked = true;
-        this.clickY = e.pageY;
-        this.clickX = e.pageX;
+        this.isDown = true;
+        this.startX = e.pageX - this.map.offsetLeft;
+        this.scrollLeft = this.map.scrollLeft;
+        this.startY = e.pageY - this.map.offsetTop;
+        this.scrollTop = this.map.scrollTop;
     }
 
     mouseUp(e) {
-        this.clicked = false;
+        this.isDown = false;
+    }
+
+    mouseLeave(e) {
+        // same behaviour as mousedown
+        this.mouseUp(e);
+    }
+
+    mouseMove(e) {
+        if (!this.isDown) return;
+        e.preventDefault();
+        const walkX = (e.pageX - this.map.offsetLeft - this.startX);
+        this.map.scrollLeft = this.scrollLeft - walkX;
+        const walkY = (e.pageY - this.map.offsetTop - this.startY);
+        this.map.scrollTop = this.scrollTop - walkY;
     }
 
     componentDidMount() {
-        this.map.addEventListener('mousemove', this.mouseMove);
         this.map.addEventListener('mousedown', this.mouseDown);
         this.map.addEventListener('mouseup', this.mouseUp);
+        this.map.addEventListener('mouseleave', this.mouseLeave);
+        this.map.addEventListener('mousemove', this.mouseMove);
     }
 
     componentWillUnmount() {
-        this.map.removeEventListener('mousemove', this.mouseMove);
         this.map.removeEventListener('mousedown', this.mouseDown);
         this.map.removeEventListener('mouseup', this.mouseUp);
+        this.map.removeEventListener('mouseleave', this.mouseLeave);
+        this.map.removeEventListener('mousemove', this.mouseMove);
     }
 
     render() {
