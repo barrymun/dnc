@@ -84,7 +84,9 @@ class Main extends Base {
                         </div>
                     ))}
                 </div>
-                <div className={`items-hud`}/>
+                <div className={`hud-container`}>
+                    <div className={`hud`}/>
+                </div>
             </div>
         );
     }
