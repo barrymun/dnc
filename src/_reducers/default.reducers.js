@@ -8,40 +8,27 @@ import gameConstants from "../_constants/game.constants";
  * base game state
  */
 let state = {
-    map: [],
+    map: {},
 };
 
 /**
  * create the default map layout
  */
-for (let x = 0; x < 10; x++) {
-    let row = [];
-    for (let y = 0; y < 10; y++) {
-        row.push({
-            x,
-            y,
-            type: gameConstants.typeFlat,
-        })
+const d = gameConstants.mapDimensions;
+
+for (let i = 0; i < (d * d); i++) {
+    state.map[i] = {
+        id: i,
+        x: parseInt(i / d),
+        y: parseInt(i % d),
+        type: gameConstants.typeFlat,
     }
-    state.map.push(row);
 }
 
 /**
  * first tile on map (0,0) is the player city
  */
-state.map[0][0].type = gameConstants.typePlayerCity;
-
-
-// state.map = state.map.map((row, x) => {
-//     return row.map((column, y) => {
-//         return {
-//             ...column,
-//             type: 0,
-//             x,
-//             y,
-//         }
-//     })
-// });
+state.map[0].type = gameConstants.typePlayerCity;
 
 console.log({state})
 

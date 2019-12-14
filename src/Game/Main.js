@@ -1,7 +1,9 @@
 import React from 'react';
 import {Base} from "../_components";
+import gameConstants from "../_constants/game.constants";
+import Button from "@material-ui/core/Button";
 
-import '../static/css/map.css';
+import '../static/css/game.css';
 
 class Main extends Base {
 
@@ -73,8 +75,23 @@ class Main extends Base {
         }
     };
 
-    render() {
+    chunkMap = () => {
         const {map} = this.props;
+        let r = [];
+        let temp = [];
+
+        Object.values(map).forEach((o, index) => {
+            temp.push(o);
+            if ((index + 1) % gameConstants.mapDimensions === 0) {
+                r.push(temp);
+                temp = [];
+            }
+        });
+        return r;
+    };
+
+    render() {
+        // const {map} = this.props;
 
         return (
             <div className={`container`}>
@@ -82,7 +99,7 @@ class Main extends Base {
                     ref={node => this.map = node}
                     className={`map`}
                 >
-                    {map.map((row, index) => (
+                    {this.chunkMap().map((row, index) => (
                         <div
                             key={index}
                             className={`tile-container`}
@@ -91,6 +108,7 @@ class Main extends Base {
                                 <div
                                     key={index}
                                     className={this.getTileClassName(tile.type)}
+                                    onClick={() => console.log(tile.id)}
                                 />
                             ))}
                         </div>
