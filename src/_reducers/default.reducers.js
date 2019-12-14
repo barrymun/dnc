@@ -11,7 +11,7 @@ import tc from "../_constants/troop.constants";
 let state = {
     game: {
         map: {},
-        selectedTileId: null,
+        selectedTile: null,
     },
 };
 

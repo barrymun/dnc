@@ -1,3 +1,3 @@
 export default {
-    selectTileId: `selectTileId`,
+    selectTile: `selectTile`,
 }

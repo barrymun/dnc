@@ -8,7 +8,6 @@
     flex-direction: column;
     min-height: 100vh;
     max-height: 100vh;
-    width: 100%;
     box-sizing: border-box;
     border: 1px solid black;
     overflow: hidden;  /*drag scroll only*/
@@ -19,7 +18,9 @@
     -ms-user-select: none;
     user-select: none;
     cursor: all-scroll;
-    padding: 25vh 0;
+    width: 100%;
+    /*width: calc(100% - 5vw);  !*https://stackoverflow.com/a/40981585*!*/
+    padding: 25vh 10vw;
 }
 
 .tile-container {
@@ -68,9 +69,10 @@
 .hud-bot {
     position: absolute;
     bottom: 0;
-    background: black;
+    background: white;
     box-sizing: border-box;
     border: 1px solid black;
+    border-radius: 4px;
     min-height: 16vh;
     max-height: 16vh;
     min-width: 50vw;
@@ -85,11 +87,13 @@
 
 .hud-right {
     position: absolute;
-    background: black;
+    background: white;
     box-sizing: border-box;
     border: 1px solid black;
-    width: 10vw;
+    border-radius: 4px;
+    width: 14vw;
     height: 40vh;
     top: calc(50% - 20vh);
     right: 0;
+    overflow: scroll;
 }

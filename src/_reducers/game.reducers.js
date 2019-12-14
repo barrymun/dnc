@@ -3,10 +3,10 @@ import ac from "../_constants/action.constants";
 
 export function game(state = initialState.game, action) {
     switch (action.type) {
-        case ac.selectTileId:
+        case ac.selectTile:
             return {
                 ...state,
-                selectedTileId: action.selectedTileId,
+                selectedTile: action.selectedTile,
             };
         default:
             return state;

@@ -1,9 +1,9 @@
 import ac from "../_constants/action.constants";
 
 export default {
-    selectTileId,
+    selectTile,
 }
 
-function selectTileId(selectedTileId) {
-    return {type: ac.selectTileId, selectedTileId};
+function selectTile(selectedTile) {
+    return {type: ac.selectTile, selectedTile};
 }

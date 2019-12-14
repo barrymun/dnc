@@ -5,6 +5,11 @@ import Button from "@material-ui/core/Button";
 import '../static/css/game.css';
 import {store} from "../_helpers";
 import mapActions from "../_actions/game.actions";
+import Table from "@material-ui/core/Table";
+import TableHead from "@material-ui/core/TableHead";
+import TableRow from "@material-ui/core/TableRow";
+import TableCell from "@material-ui/core/TableCell";
+import TableBody from "@material-ui/core/TableBody";
 
 class Main extends Base {
 
@@ -97,15 +102,15 @@ class Main extends Base {
 
     /**
      *
-     * @param id
+     * @param tile
      */
-    populateTileInfo = id => {
-        store.dispatch(mapActions.selectTileId(id));
+    populateTileInfo = tile => {
+        store.dispatch(mapActions.selectTile(tile));
     };
 
     render() {
-        // const {map} = this.props;
-        // console.log(this.props.selectedTileId)
+        const {selectedTile} = this.props;
+        console.log({selectedTile})
 
         return (
             <div className={`container`}>
@@ -122,7 +127,7 @@ class Main extends Base {
                                 <div
                                     key={index}
                                     className={this.getTileClassName(tile.type)}
-                                    onClick={() => this.populateTileInfo(tile.id)}
+                                    onClick={() => this.populateTileInfo(tile)}
                                 />
                             ))}
                         </div>
@@ -131,7 +136,29 @@ class Main extends Base {
                 <div className={`hud-bot-container`}>
                     <div className={`hud-bot`}/>
                 </div>
-                <div className={`hud-right`}/>
+                <div className={`hud-right`}>
+                    {selectedTile == null
+                        ? null
+                        : (<div>
+                            <Table>
+                                <TableHead>
+                                    <TableRow>
+                                        <TableCell>Troop</TableCell>
+                                        <TableCell align="right">Count</TableCell>
+                                    </TableRow>
+                                </TableHead>
+                                <TableBody>
+                                    {Object.keys(selectedTile.troops).map((row, index) => (
+                                        <TableRow key={index}>
+                                            <TableCell>{row}</TableCell>
+                                            <TableCell>{selectedTile.troops[row]}</TableCell>
+                                        </TableRow>
+                                    ))}
+                                </TableBody>
+                            </Table>
+                        </div>)
+                    }
+                </div>
             </div>
         );
     }
