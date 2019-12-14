@@ -2,13 +2,26 @@ import React from 'react';
 import {connect} from 'react-redux';
 import {Router} from 'react-router-dom';
 
-import {history} from '../_helpers';
+import {history, store} from '../_helpers';
 import homePublicRoutes from '../Home/_routes/public.routes';
 import gamePublicRoutes from '../Game/_routes/public.routes';
+import {Base} from "../_components";
+import gameActions from "../_actions/game.actions";
 
 import './App.css';
 
-class App extends React.Component {
+const interval = 1000;  // 1 second
+
+class App extends Base {
+
+    componentDidMount() {
+        window.setInterval(this.updateResources, interval);
+    }
+
+    updateResources = () => {
+        store.dispatch(gameActions.regenMana());
+    };
+
     render() {
         return (
             <Router history={history}>

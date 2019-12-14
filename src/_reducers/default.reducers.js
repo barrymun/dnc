@@ -12,6 +12,11 @@ let state = {
     game: {
         map: {},
         selectedTile: null,
+        mana: {
+            current: 1000,
+            max: 1000,
+            regenAmount: 5,
+        },
     },
 };
 
