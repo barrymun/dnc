@@ -52,20 +52,44 @@
     background-color: grey;
 }
 
-.hud-container {
+.npc-tower {
+    background-color: brown;
+}
+
+.npc-base {
+    background-color: red;
+}
+
+.hud-bot-container {
     display: flex;
     justify-content: center;
 }
 
-.hud {
+.hud-bot {
     position: absolute;
     bottom: 0;
     background: black;
-    min-height: 16vh;
-    max-height: 16vh;
     box-sizing: border-box;
     border: 1px solid black;
-    /*min-width: 500px;*/
+    min-height: 16vh;
+    max-height: 16vh;
     min-width: 50vw;
     max-width: 50vw;
+}
+
+.hud-right-container {
+    display: flex;
+    /*justify-content: center;*/
+    align-items: center;
+}
+
+.hud-right {
+    position: absolute;
+    background: black;
+    box-sizing: border-box;
+    border: 1px solid black;
+    width: 10vw;
+    height: 40vh;
+    top: calc(50% - 20vh);
+    right: 0;
 }

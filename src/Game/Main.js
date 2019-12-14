@@ -2,8 +2,9 @@ import React from 'react';
 import {Base} from "../_components";
 import gameConstants from "../_constants/game.constants";
 import Button from "@material-ui/core/Button";
-
 import '../static/css/game.css';
+import {store} from "../_helpers";
+import mapActions from "../_actions/game.actions";
 
 class Main extends Base {
 
@@ -70,6 +71,10 @@ class Main extends Base {
                 return `${base} flat`;
             case 1:
                 return `${base} player-city`;
+            case 2:
+                return `${base} npc-tower`;
+            case 3:
+                return `${base} npc-base`;
             default:
                 return `${base} flat`;
         }
@@ -90,8 +95,17 @@ class Main extends Base {
         return r;
     };
 
+    /**
+     *
+     * @param id
+     */
+    populateTileInfo = id => {
+        store.dispatch(mapActions.selectTileId(id));
+    };
+
     render() {
         // const {map} = this.props;
+        // console.log(this.props.selectedTileId)
 
         return (
             <div className={`container`}>
@@ -108,15 +122,16 @@ class Main extends Base {
                                 <div
                                     key={index}
                                     className={this.getTileClassName(tile.type)}
-                                    onClick={() => console.log(tile.id)}
+                                    onClick={() => this.populateTileInfo(tile.id)}
                                 />
                             ))}
                         </div>
                     ))}
                 </div>
-                <div className={`hud-container`}>
-                    <div className={`hud`}/>
+                <div className={`hud-bot-container`}>
+                    <div className={`hud-bot`}/>
                 </div>
+                <div className={`hud-right`}/>
             </div>
         );
     }

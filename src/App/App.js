@@ -20,12 +20,8 @@ class App extends React.Component {
 }
 
 const mapStateToProps = (state, ownProps) => {
-    const {
-        map,
-    } = state;
-
     return {
-        map,
+        ...state.game,
     };
 };
 

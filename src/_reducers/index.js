@@ -1,7 +1,7 @@
 import {combineReducers} from 'redux';
-import {map} from "./map.reducers";
+import {game} from "./game.reducers";
 
 const rootReducer = combineReducers({
-    map,
+    game,
 });
 export default rootReducer;

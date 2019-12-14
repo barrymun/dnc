@@ -1,5 +1,7 @@
 export default {
+    mapDimensions: 11,
     typeFlat: 0,
     typePlayerCity: 1,
-    mapDimensions: 10,
+    typeNPCTower: 2,
+    typeNPCBase: 3,
 };
