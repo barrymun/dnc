@@ -110,7 +110,6 @@ class Main extends Base {
 
     render() {
         const {selectedTile} = this.props;
-        console.log({selectedTile})
 
         return (
             <div className={`container`}>
@@ -124,11 +123,17 @@ class Main extends Base {
                             className={`tile-container`}
                         >
                             {row.map((tile, index) => (
-                                <div
-                                    key={index}
-                                    className={this.getTileClassName(tile.type)}
-                                    onClick={() => this.populateTileInfo(tile)}
-                                />
+                                <div key={index} className={`tile-wrapper`}>
+                                    <div>
+                                        <div className={`coord-container`}>
+                                            ({tile.x}, {tile.y})
+                                        </div>
+                                    </div>
+                                    <div
+                                        className={this.getTileClassName(tile.type)}
+                                        onClick={() => this.populateTileInfo(tile)}
+                                    />
+                                </div>
                             ))}
                         </div>
                     ))}

@@ -30,6 +30,20 @@
     /*overflow: hidden;*/
 }
 
+.tile-wrapper {
+    display: inline-block;
+    text-align: center;
+}
+
+.coord-container {
+    display: inline-block;
+    background-color: lightyellow;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 1px 3px;
+    font-size: 11px;
+}
+
 .tile {
     display: inline-block;
     margin: 20px;
