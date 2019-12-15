@@ -1,7 +1,6 @@
 import React from 'react';
 import {Base} from "../_components";
 import gameConstants from "../_constants/game.constants";
-import Button from "@material-ui/core/Button";
 import '../static/css/game.css';
 import {store} from "../_helpers";
 import mapActions from "../_actions/game.actions";
@@ -12,6 +11,9 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Tooltip from "@material-ui/core/Tooltip";
 import {Shop} from "./_components";
+import Divider from "@material-ui/core/Divider";
+import IconButton from "@material-ui/core/IconButton";
+import CloseIcon from '@material-ui/icons/Close';
 
 class Main extends Base {
 
@@ -132,6 +134,11 @@ class Main extends Base {
     };
 
 
+    closeHudRight = () => {
+        store.dispatch(mapActions.selectTile(null));
+    };
+
+
     render() {
         const {
             gold,
@@ -168,15 +175,24 @@ class Main extends Base {
                         </div>
                     ))}
                 </div>
+
                 <div className={`hud-bot-container`}>
                     <div className={`hud-bot`}>
                         <Shop/>
                     </div>
                 </div>
-                <div className={`hud-right`}>
-                    {selectedTile == null
-                        ? null
-                        : (<div>
+
+                {selectedTile == null
+                    ? null
+                    : (<div>
+                        <div className={`hud-right-close`}>
+                            <Tooltip title="Close">
+                                <IconButton onClick={this.closeHudRight}>
+                                    <CloseIcon/>
+                                </IconButton>
+                            </Tooltip>
+                        </div>
+                        <div className={`hud-right`}>
                             <div className={`hud-right-type`}>
                                 {this.getTypeFriendly(selectedTile.type)}
                             </div>
@@ -196,9 +212,20 @@ class Main extends Base {
                                     ))}
                                 </TableBody>
                             </Table>
-                        </div>)
-                    }
-                </div>
+
+                            <Divider/>
+                            <div className={`sel-tile-actions`}>
+                                <Tooltip title="Attack">
+                                    <button
+                                        disabled={selectedTile.type === gameConstants.typePlayerCity}
+                                        className={`sel-tile-action`}
+                                    />
+                                </Tooltip>
+                            </div>
+                        </div>
+                    </div>)
+                }
+
             </div>
         );
     }
