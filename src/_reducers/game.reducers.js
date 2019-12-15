@@ -27,6 +27,20 @@ export function game(state = initialState.game, action) {
                 ...state,
                 mana: updatedMana,
             };
+        case ac.regenTroops:
+            let playerTroops = state.map[0].troops;
+            Object.keys(playerTroops).forEach(key => playerTroops[key] += state.troopGen[key]);
+
+            return {
+                ...state,
+                map: {
+                    ...state.map,
+                    0: {
+                        ...state.map[0],
+                        troops: playerTroops,
+                    },
+                },
+            };
         default:
             return state;
     }

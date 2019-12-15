@@ -7,6 +7,7 @@ import tc from "../_constants/troop.constants";
 
 /**
  * base game state
+ * *** all rate values refer to time in seconds ***
  */
 let state = {
     game: {
@@ -16,6 +17,13 @@ let state = {
             current: 1000,
             max: 1000,
             regenAmount: 5,
+        },
+        troopGen: {
+            [tc.war]: 10,
+            [tc.sw]: 5,
+            [tc.pk]: 5,
+            [tc.arc]: 2,
+            [tc.cav]: 1,
         },
     },
 };

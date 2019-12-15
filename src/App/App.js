@@ -20,6 +20,7 @@ class App extends Base {
 
     updateResources = () => {
         store.dispatch(gameActions.regenMana());
+        store.dispatch(gameActions.regenTroops());
     };
 
     render() {
