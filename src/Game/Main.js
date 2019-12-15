@@ -11,6 +11,7 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Tooltip from "@material-ui/core/Tooltip";
+import {Shop} from "./_components";
 
 class Main extends Base {
 
@@ -148,7 +149,9 @@ class Main extends Base {
                     ))}
                 </div>
                 <div className={`hud-bot-container`}>
-                    <div className={`hud-bot`}/>
+                    <div className={`hud-bot`}>
+                        <Shop/>
+                    </div>
                 </div>
                 <div className={`hud-right`}>
                     {selectedTile == null

@@ -28,6 +28,7 @@
     max-height: 100vh;
     box-sizing: border-box;
     border: 1px solid black;
+    border-radius: 4px;
     overflow: hidden; /*drag scroll only*/
     /*handling no selection text on drag scroll*/
     -webkit-touch-callout: none;
