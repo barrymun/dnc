@@ -17,6 +17,11 @@ let state = {
             current: 500,
             regenAmount: 1,
         },
+        level: {
+            current: 1,
+            max: 10,
+            expRequired: 500,
+        },
         mana: {
             current: 1000,
             max: 1000,
@@ -63,8 +68,8 @@ state.game.map[0].type = gameConstants.typePlayerCity;
 state.game.map[0].troops = {
     [tc.war]: 500,
     [tc.lgn]: 500,
-    [tc.pult]: 500,
     [tc.arc]: 500,
+    [tc.pult]: 500,
     [tc.mage]: 500,
     [tc.sorc]: 500,
 };

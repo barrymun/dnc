@@ -133,3 +133,7 @@
     right: 0;
     overflow: scroll;
 }
+
+.hud-right-type {
+    padding: 8px 15px;
+}

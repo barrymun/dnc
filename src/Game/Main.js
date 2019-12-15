@@ -110,6 +110,28 @@ class Main extends Base {
         store.dispatch(mapActions.selectTile(tile));
     };
 
+
+    /**
+     *
+     * @param type
+     * @returns {string}
+     */
+    getTypeFriendly = type => {
+        switch (type) {
+            case 0:
+                return `Flat`;
+            case 1:
+                return `My city`;
+            case 2:
+                return `NPC tower`;
+            case 3:
+                return `NPC base`;
+            default:
+                return `Flat`;
+        }
+    };
+
+
     render() {
         const {
             gold,
@@ -155,6 +177,9 @@ class Main extends Base {
                     {selectedTile == null
                         ? null
                         : (<div>
+                            <div className={`hud-right-type`}>
+                                {this.getTypeFriendly(selectedTile.type)}
+                            </div>
                             <Table>
                                 <TableHead>
                                     <TableRow>
