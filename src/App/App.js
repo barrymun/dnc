@@ -19,6 +19,7 @@ class App extends Base {
     }
 
     updateResources = () => {
+        store.dispatch(gameActions.regenGold());
         store.dispatch(gameActions.regenMana());
         store.dispatch(gameActions.regenTroops());
     };

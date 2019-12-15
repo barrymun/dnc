@@ -8,6 +8,14 @@ export function game(state = initialState.game, action) {
                 ...state,
                 selectedTile: action.selectedTile,
             };
+        case ac.regenGold:
+            return {
+                ...state,
+                gold: {
+                    ...state.gold,
+                    current: state.gold.current + state.gold.regenAmount,
+                },
+            };
         case ac.regenMana:
             let updatedMana = {...state.mana};
 

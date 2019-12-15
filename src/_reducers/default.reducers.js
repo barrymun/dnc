@@ -13,6 +13,10 @@ let state = {
     game: {
         map: {},
         selectedTile: null,
+        gold: {
+            current: 500,
+            regenAmount: 1,
+        },
         mana: {
             current: 1000,
             max: 1000,

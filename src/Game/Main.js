@@ -10,6 +10,7 @@ import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
+import Tooltip from "@material-ui/core/Tooltip";
 
 class Main extends Base {
 
@@ -109,10 +110,18 @@ class Main extends Base {
     };
 
     render() {
-        const {selectedTile} = this.props;
+        const {
+            gold,
+            selectedTile,
+        } = this.props;
 
         return (
             <div className={`container`}>
+                <Tooltip title="Gold">
+                    <div className={`gold-hud`}>
+                        {gold.current}
+                    </div>
+                </Tooltip>
                 <div
                     ref={node => this.map = node}
                     className={`map`}
