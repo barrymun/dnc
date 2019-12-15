@@ -24,11 +24,13 @@ let state = {
         },
         troopGen: {
             [tc.war]: 10,
-            [tc.sw]: 5,
-            [tc.pk]: 5,
-            [tc.arc]: 2,
-            [tc.cav]: 1,
+            [tc.lgn]: 4,
+            [tc.arc]: 6,
+            [tc.pult]: 2,
+            [tc.mage]: 3,
+            [tc.sorc]: 1,
         },
+        shop: {},
     },
 };
 
@@ -45,10 +47,11 @@ for (let i = 0; i < (d * d); i++) {
         type: gameConstants.typeFlat,
         troops: {
             [tc.war]: 1000,
-            [tc.sw]: 500,
-            [tc.pk]: 500,
-            [tc.arc]: 0,
-            [tc.cav]: 0,
+            [tc.lgn]: 400,
+            [tc.arc]: 200,
+            [tc.pult]: 100,
+            [tc.mage]: 0,
+            [tc.sorc]: 0,
         },
     }
 }
@@ -59,10 +62,11 @@ for (let i = 0; i < (d * d); i++) {
 state.game.map[0].type = gameConstants.typePlayerCity;
 state.game.map[0].troops = {
     [tc.war]: 500,
-    [tc.sw]: 500,
-    [tc.pk]: 500,
+    [tc.lgn]: 500,
+    [tc.pult]: 500,
     [tc.arc]: 500,
-    [tc.cav]: 500,
+    [tc.mage]: 500,
+    [tc.sorc]: 500,
 };
 
 /**
@@ -74,11 +78,12 @@ NPCTowers.forEach(i => {
         ...state.game.map[i],
         type: gameConstants.typeNPCTower,
         troops: {
-            [tc.war]: 50000,
-            [tc.sw]: 12000,
-            [tc.pk]: 12000,
-            [tc.arc]: 8000,
-            [tc.cav]: 1000,
+            [tc.war]: 10000,
+            [tc.lgn]: 50000,
+            [tc.arc]: 5000,
+            [tc.pult]: 10000,
+            [tc.mage]: 2000,
+            [tc.sorc]: 8000,
         },
     };
 });
@@ -89,14 +94,20 @@ NPCBase.forEach(i => {
         ...state.game.map[i],
         type: gameConstants.typeNPCBase,
         troops: {
-            [tc.war]: 120000,
-            [tc.sw]: 80000,
-            [tc.pk]: 80000,
-            [tc.arc]: 30000,
-            [tc.cav]: 10000,
+            [tc.war]: 50000,
+            [tc.lgn]: 300000,
+            [tc.arc]: 25000,
+            [tc.pult]: 80000,
+            [tc.mage]: 20000,
+            [tc.sorc]: 50000,
         },
     };
 });
+
+/**
+ * shop items
+ */
+
 
 console.log({state})
 
