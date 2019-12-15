@@ -38,8 +38,7 @@
     user-select: none;
     cursor: all-scroll;
     width: 100%;
-    /*width: calc(100% - 5vw);  !*https://stackoverflow.com/a/40981585*!*/
-    padding: 25vh 10vw;
+    padding: 25vh 18vw;
 }
 
 .tile-container {
@@ -47,6 +46,12 @@
     flex: 0 0 auto;
     white-space: nowrap;
     /*overflow: hidden;*/
+}
+
+/* adding this to provide an additional padding layer, as this is ignored RHS for absolute positioning */
+.tile-container-post {
+    display: inline-block;
+    width: 18vw;
 }
 
 .tile-wrapper {

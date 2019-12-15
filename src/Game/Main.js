@@ -123,10 +123,7 @@ class Main extends Base {
                         {gold.current}
                     </div>
                 </Tooltip>
-                <div
-                    ref={node => this.map = node}
-                    className={`map`}
-                >
+                <div ref={node => this.map = node} className={`map`}>
                     {this.chunkMap().map((row, index) => (
                         <div
                             key={index}
@@ -145,6 +142,7 @@ class Main extends Base {
                                     />
                                 </div>
                             ))}
+                            <div className={`tile-container-post`}/>
                         </div>
                     ))}
                 </div>
