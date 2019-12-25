@@ -49,6 +49,10 @@ export function game(state = initialState.game, action) {
                     },
                 },
             };
+        case ac.attack:
+            return {
+                ...state,
+            };
         default:
             return state;
     }

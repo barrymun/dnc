@@ -134,8 +134,20 @@ class Main extends Base {
     };
 
 
+    /**
+     *
+     */
     closeHudRight = () => {
         store.dispatch(mapActions.selectTile(null));
+    };
+
+
+    /**
+     *
+     * @param tile
+     */
+    attack = tile => {
+        store.dispatch(mapActions.attack(tile));
     };
 
 
@@ -219,6 +231,7 @@ class Main extends Base {
                                     <button
                                         disabled={selectedTile.type === gameConstants.typePlayerCity}
                                         className={`sel-tile-action`}
+                                        onClick={() => this.attack(selectedTile)}
                                     />
                                 </Tooltip>
                             </div>

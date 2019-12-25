@@ -3,4 +3,5 @@ export default {
     regenGold: `regenGold`,
     regenMana: `regenMana`,
     regenTroops: `regenTroops`,
+    attack: `attack`,
 }
