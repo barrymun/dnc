@@ -11,3 +11,18 @@
     height: 50px;
     cursor: pointer;
 }
+
+._mh-container {
+    margin: 6px;
+    border: 1px solid black;
+    border-radius: 3px;
+    height: 16px;
+}
+
+.mana-container {
+    background-color: #045B9B;
+}
+
+.health-container {
+    background-color: #039811;
+}

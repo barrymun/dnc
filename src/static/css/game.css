@@ -113,6 +113,7 @@
     border-radius: 4px;
     height: 16vh;
     width: 40vw;
+    padding: 4px;
 }
 
 .hud-right-container {

@@ -5,7 +5,7 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import "../static/css/shop.css";
+import "../static/css/hud.css";
 
 function Shop() {
     const [open, setOpen] = React.useState(false);

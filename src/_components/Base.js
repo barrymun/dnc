@@ -9,9 +9,16 @@ class Base extends React.Component {
         this.setStateAsync = this.setStateAsync.bind(this);
     }
 
+
+    /**
+     *
+     * @param state
+     * @returns {Promise<unknown>}
+     */
     setStateAsync(state) {
         return new Promise(resolve => this.setState(state, resolve));
     }
+
 }
 
 export {Base};

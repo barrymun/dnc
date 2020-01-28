@@ -1,7 +1,6 @@
 import React from 'react';
 import {Base} from "../_components";
 import gameConstants from "../_constants/game.constants";
-import '../static/css/game.css';
 import {store} from "../_helpers";
 import mapActions from "../_actions/game.actions";
 import Table from "@material-ui/core/Table";
@@ -10,10 +9,16 @@ import TableRow from "@material-ui/core/TableRow";
 import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Tooltip from "@material-ui/core/Tooltip";
-import {Shop} from "./_components";
+import {
+    Shop,
+    Health,
+    Mana,
+} from "./_components";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from '@material-ui/icons/Close';
+
+import '../static/css/game.css';
 
 class Main extends Base {
 
@@ -191,6 +196,8 @@ class Main extends Base {
                 <div className={`hud-bot-container`}>
                     <div className={`hud-bot`}>
                         <Shop/>
+                        <Health/>
+                        <Mana/>
                     </div>
                 </div>
 
@@ -228,11 +235,13 @@ class Main extends Base {
                             <Divider/>
                             <div className={`sel-tile-actions`}>
                                 <Tooltip title="Attack">
-                                    <button
-                                        disabled={selectedTile.type === gameConstants.typePlayerCity}
-                                        className={`sel-tile-action`}
-                                        onClick={() => this.attack(selectedTile)}
-                                    />
+                                    <div>
+                                        <button
+                                            disabled={selectedTile.type === gameConstants.typePlayerCity}
+                                            className={`sel-tile-action`}
+                                            onClick={() => this.attack(selectedTile)}
+                                        />
+                                    </div>
                                 </Tooltip>
                             </div>
                         </div>
