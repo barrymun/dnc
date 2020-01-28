@@ -14,6 +14,9 @@ function Mana(props) {
                 className={`_mh-inner mana-container`}
                 style={{width: `${n / d * 100}%`}}
             />
+            <div className={`_mh-amount-text`}>
+                {n}/{d}
+            </div>
             <div className={`_mh-regen-text`}>
                 +{mana.regenAmount}
             </div>

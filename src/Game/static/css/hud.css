@@ -21,10 +21,13 @@
     background-color: black;
     display: flex;
     align-items: center;
+    justify-content: center;
 }
 
 ._mh-inner {
     height: 100%;
+    position: absolute;
+    left: 0;
 }
 
 .mana-container {
@@ -33,6 +36,12 @@
 
 .health-container {
     background-color: #039811;
+}
+
+._mh-amount-text {
+    color: white;
+    font-size: 12px;
+    position: absolute;
 }
 
 ._mh-regen-text {

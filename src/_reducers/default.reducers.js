@@ -23,7 +23,7 @@ let state = {
             expRequired: 500,
         },
         mana: {
-            current: 900,
+            current: 500,
             max: 1000,
             regenAmount: 5,
         },
