@@ -3,7 +3,6 @@ import React from 'react';
 import "../static/css/hud.css";
 
 function Mana(props) {
-    // console.log({props})
     let mana = props.mana;
     let n = mana.current;
     let d = mana.max;

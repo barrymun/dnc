@@ -10,9 +10,9 @@ import TableCell from "@material-ui/core/TableCell";
 import TableBody from "@material-ui/core/TableBody";
 import Tooltip from "@material-ui/core/Tooltip";
 import {
-    Shop,
     Health,
     Mana,
+    Shop,
 } from "./_components";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
@@ -164,11 +164,10 @@ class Main extends Base {
 
         return (
             <div className={`container`}>
-                <Tooltip title="Gold">
-                    <div className={`gold-hud`}>
-                        {gold.current}
-                    </div>
-                </Tooltip>
+
+                {/* shop which displays current gold count + shop dialog */}
+                <Shop gold={gold}/>
+
                 <div ref={node => this.map = node} className={`map`}>
                     {this.chunkMap().map((row, index) => (
                         <div
@@ -195,7 +194,6 @@ class Main extends Base {
 
                 <div className={`hud-bot-container`}>
                     <div className={`hud-bot`}>
-                        <Shop/>
                         <Health {...this.props}/>
                         <Mana {...this.props}/>
                     </div>
