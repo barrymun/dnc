@@ -19,6 +19,7 @@ import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from '@material-ui/icons/Close';
 
 import '../static/css/game.css';
+import "./static/css/hud.css";
 
 class Main extends Base {
 
@@ -158,7 +159,6 @@ class Main extends Base {
 
     render() {
         const {
-            gold,
             selectedTile,
         } = this.props;
 
@@ -166,7 +166,7 @@ class Main extends Base {
             <div className={`container`}>
 
                 {/* shop which displays current gold count + shop dialog */}
-                <Shop gold={gold}/>
+                <Shop {...this.props}/>
 
                 <div ref={node => this.map = node} className={`map`}>
                     {this.chunkMap().map((row, index) => (

@@ -5,24 +5,25 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 
-import "../../static/css/game.css";
-import Button from "@material-ui/core/Button";
-
 function Shop(props) {
-    const gold = props.gold;
-    const [open, setOpen] = React.useState(false);
+    const {gold, shop} = props;
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+    const [values, setValues] = React.useState({
+        open: false,
+        item: null,
+    });
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+    const handleOpen = () => setValues({...values, open: true});
+
+    const handleClose = () => setValues({...values, open: false});
+
+    const selectItem = item => setValues({...values, item});
+
+    const handleBuy = () => ({});
 
     return (<div>
         <Tooltip title="Click to shop">
-            <div className={`gold-hud`} onClick={handleClickOpen}>
+            <div className={`gold-hud`} onClick={handleOpen}>
                 <div className={`gold-coins`}/>
                 <div>
                     {gold.current}
@@ -31,20 +32,37 @@ function Shop(props) {
         </Tooltip>
 
         <Dialog
-            open={open}
+            open={values.open}
             onClose={handleClose}
             maxWidth="sm"
             fullWidth
         >
             <DialogTitle>{`Shop`}</DialogTitle>
+
             <DialogContent>
-                <div className={`shop-item`}>
-                </div>
+                {shop.map(o => (<div>
+                        <div>
+                            <Tooltip title={o.effect}>
+                                <div onClick={() => selectItem(o)} className={`shop-item`}/>
+                            </Tooltip>
+                        </div>
+                        <div>
+                            {o.name}
+                        </div>
+                    </div>
+                ))}
             </DialogContent>
+
             <DialogActions>
-                <Button onClick={handleClose} color="primary" autoFocus>
+                <button onClick={handleClose}>
                     Close
-                </Button>
+                </button>
+                <button
+                    disabled={values.item == null}
+                    onClick={handleBuy}
+                >
+                    Buy
+                </button>
             </DialogActions>
         </Dialog>
     </div>);

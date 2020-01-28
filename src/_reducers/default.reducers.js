@@ -35,7 +35,14 @@ let state = {
             [tc.mage]: 3,
             [tc.sorc]: 1,
         },
-        shop: {},
+        shop: [
+            {
+                id: 1,
+                name: `mana regen`,
+                effect: `+10.0 mana regen per second`,
+                cost: 300,
+            },
+        ],
     },
 };
 

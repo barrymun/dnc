@@ -1,7 +1,5 @@
 import React from 'react';
 
-import "../static/css/hud.css";
-
 function Mana(props) {
     let mana = props.mana;
     let n = mana.current;
