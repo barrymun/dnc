@@ -196,8 +196,8 @@ class Main extends Base {
                 <div className={`hud-bot-container`}>
                     <div className={`hud-bot`}>
                         <Shop/>
-                        <Health/>
-                        <Mana/>
+                        <Health {...this.props}/>
+                        <Mana {...this.props}/>
                     </div>
                 </div>
 

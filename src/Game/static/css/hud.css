@@ -17,6 +17,14 @@
     border: 1px solid black;
     border-radius: 3px;
     height: 16px;
+    position: relative;
+    background-color: black;
+    display: flex;
+    align-items: center;
+}
+
+._mh-inner {
+    height: 100%;
 }
 
 .mana-container {
@@ -25,4 +33,11 @@
 
 .health-container {
     background-color: #039811;
+}
+
+._mh-regen-text {
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    right: 4px;
 }
