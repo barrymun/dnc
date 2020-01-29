@@ -7,10 +7,12 @@ import DialogTitle from '@material-ui/core/DialogTitle';
 import {store} from "../../_helpers";
 import gameActions from "../../_actions/game.actions";
 import ic from "../../_constants/item.constants";
+import {getRealGold} from "../../_utils/utils.utils";
 
 function Shop(props) {
 
-  const {gold, shop, playerItems} = props;
+  const {shop, playerItems} = props;
+  const gold = getRealGold(props);
 
   const [values, setValues] = React.useState({
     open: false,

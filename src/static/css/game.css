@@ -126,6 +126,7 @@
     border-radius: 4px;
     height: 16vh;
     width: 40vw;
+    min-width: 550px;
     padding: 4px;
 }
 
@@ -159,6 +160,7 @@
     border: 1px solid black;
     border-radius: 4px;
     width: 14vw;
+    min-width: 200px;
     height: 40vh;
     top: calc(50% - 20vh);
     right: 0;

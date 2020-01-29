@@ -1,7 +1,10 @@
 import initialState from "./default.reducers";
 import ac from "../_constants/action.constants";
 import ic from "../_constants/item.constants";
-import {getRealMana} from "../_utils/utils.utils";
+import {
+  getRealMana,
+  getRealGold,
+} from "../_utils/utils.utils";
 
 export function game(state = initialState.game, action) {
   // deconstruct the state
@@ -17,11 +20,13 @@ export function game(state = initialState.game, action) {
         selectedTile: action.selectedTile,
       };
     case ac.regenGold:
+      let realGold = getRealGold(state);
+
       return {
         ...state,
         gold: {
-          ...state.gold,
-          current: state.gold.current + state.gold.regenAmount,
+          ...gold,
+          current: parseFloat((realGold.current + realGold.regenAmount).toFixed(1)),
         },
       };
     case ac.regenMana:
@@ -36,7 +41,7 @@ export function game(state = initialState.game, action) {
       } else {
         updatedMana = {
           ...mana,
-          current: realMana.current + realMana.regenAmount,
+          current: parseFloat((realMana.current + realMana.regenAmount).toFixed(1)),
         }
       }
 

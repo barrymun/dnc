@@ -36,7 +36,7 @@ export const getRealMana = state => {
     const {mana, playerItems} = state;
 
     let max = mana.max;
-    let regenAmount = mana.regenAmount;  // base
+    let regenAmount = mana.regenAmount;
 
     playerItems.forEach(i => {
         if (i.playerEffect.mana != null && i.playerEffect.mana.max != null) max += i.playerEffect.mana.max;
@@ -46,6 +46,27 @@ export const getRealMana = state => {
     return {
         ...mana,
         max,
+        regenAmount,
+    }
+};
+
+
+/**
+ *
+ * @param state
+ * @returns {{regenAmount: number}}
+ */
+export const getRealGold = state => {
+    const {gold, playerItems} = state;
+
+    let regenAmount = gold.regenAmount;
+
+    playerItems.forEach(i => {
+        if (i.playerEffect.gold != null && i.playerEffect.gold.regenAmount != null) regenAmount += i.playerEffect.gold.regenAmount;
+    });
+
+    return {
+        ...gold,
         regenAmount,
     }
 };
