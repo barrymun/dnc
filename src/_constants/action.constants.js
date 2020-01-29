@@ -4,4 +4,5 @@ export default {
     regenMana: `regenMana`,
     regenTroops: `regenTroops`,
     attack: `attack`,
+    buy: `buy`,
 }

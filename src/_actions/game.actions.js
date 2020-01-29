@@ -6,6 +6,7 @@ export default {
     regenMana,
     regenTroops,
     attack,
+    buy,
 }
 
 function selectTile(selectedTile) {
@@ -26,4 +27,8 @@ function regenTroops() {
 
 function attack(tile) {
     return {type: ac.attack, tile};
+}
+
+function buy(item) {
+    return {type: ac.buy, item};
 }
