@@ -19,13 +19,13 @@ let state = {
       expRequired: 500,
     },
     gold: {
-      current: 500,
-      regenAmount: 1,
+      current: 5000.0,
+      regenAmount: 1.0,
     },
     mana: {
       max: 1000.0,
       current: 500.0,
-      regenAmount: 5.0,
+      regenAmount: 3.0,
     },
     troopGen: {
       [tc.war]: 10,
@@ -39,20 +39,24 @@ let state = {
       {
         id: 1,
         name: `mana regen`,
-        effect: `+10.0 mana regen`,
+        effect: `+1.5 mana regen`,
         cost: 300,
         playerEffect: {
           mana: {
             regenAmount: 1.5,
-          }
+          },
         }
       },
       {
         id: 2,
         name: `gold regen`,
-        effect: `+1.0 gold regen`,
+        effect: `+0.2 gold regen`,
         cost: 400,
-        playerEffect: {},
+        playerEffect: {
+          gold: {
+            regenAmount: 0.2,
+          },
+        },
       },
     ],
     playerItems: [],

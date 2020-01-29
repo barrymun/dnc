@@ -6,6 +6,7 @@ import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {store} from "../../_helpers";
 import gameActions from "../../_actions/game.actions";
+import ic from "../../_constants/item.constants";
 
 function Shop(props) {
 
@@ -25,6 +26,8 @@ function Shop(props) {
   const selectItem = item => setValues({...values, item});
 
   const deselectItem = () => setValues({...values, item: null});
+
+  const buyDisabled = values.item == null || gold.current < values.item.cost || playerItems.length >= ic.maxPlayerItems;
 
   const handleBuy = () => {
     if (values.item == null) return;
@@ -78,7 +81,7 @@ function Shop(props) {
           Close
         </button>
         <button
-          disabled={values.item == null}
+          disabled={buyDisabled}
           onClick={handleBuy}
         >
           Buy

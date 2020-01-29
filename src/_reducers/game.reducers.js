@@ -62,7 +62,7 @@ export function game(state = initialState.game, action) {
       let {item} = action;
 
       // cannot buy more than allocated amount
-      if (playerItems >= ic.maxPlayerItems) return state;
+      if (playerItems.length >= ic.maxPlayerItems) return state;
       // cannot but the item if the player does not have the required gold
       if (gold.current < item.cost) return state;
 
