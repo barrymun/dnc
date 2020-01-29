@@ -113,11 +113,13 @@
 .hud-bot-container {
     position: absolute;
     bottom: 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
 .hud-bot-inner {
     display: flex;
-    /*justify-content: center;*/
     background: white;
     box-sizing: border-box;
     border: 1px solid black;
@@ -129,7 +131,7 @@
 
 .hud-bot-left {
     /*subtract the width of the divisor*/
-    width: calc(75% - 20px);
+    width: calc(80% - 20px);
 }
 
 .hud-bot-divisor {
@@ -140,6 +142,8 @@
     width: 20%;
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    /*align-items: center;*/
 }
 
 .hud-right-container {
