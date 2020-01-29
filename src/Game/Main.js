@@ -13,13 +13,13 @@ import {
   Health,
   Mana,
   Shop,
+  PlayerItems,
 } from "./_components";
 import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from '@material-ui/icons/Close';
 
 import '../static/css/game.css';
-import "./static/css/hud.css";
 
 class Main extends Base {
 
@@ -193,9 +193,15 @@ class Main extends Base {
         </div>
 
         <div className={`hud-bot-container`}>
-          <div className={`hud-bot`}>
-            <Health {...this.props}/>
-            <Mana {...this.props}/>
+          <div className={`hud-bot-inner`}>
+            <div className={`hud-bot-left`}>
+              <Health {...this.props}/>
+              <Mana {...this.props}/>
+            </div>
+            <div className={`hud-bot-divisor`}/>
+            <div className={`hud-bot-right`}>
+              <PlayerItems {...this.props}/>
+            </div>
           </div>
         </div>
 

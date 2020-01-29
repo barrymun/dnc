@@ -21,7 +21,7 @@ function Shop(props) {
 
   const handleOpen = () => setValues({...values, open: true});
 
-  const handleClose = () => setValues({...values, open: false});
+  const handleClose = () => setValues({...values, open: false, item: null});
 
   const selectItem = item => setValues({...values, item});
 

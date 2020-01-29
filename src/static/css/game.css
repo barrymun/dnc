@@ -111,13 +111,13 @@
 }
 
 .hud-bot-container {
-    display: flex;
-    justify-content: center;
-}
-
-.hud-bot {
     position: absolute;
     bottom: 0;
+}
+
+.hud-bot-inner {
+    display: flex;
+    /*justify-content: center;*/
     background: white;
     box-sizing: border-box;
     border: 1px solid black;
@@ -125,6 +125,21 @@
     height: 16vh;
     width: 40vw;
     padding: 4px;
+}
+
+.hud-bot-left {
+    /*subtract the width of the divisor*/
+    width: calc(75% - 20px);
+}
+
+.hud-bot-divisor {
+    width: 20px;
+}
+
+.hud-bot-right {
+    width: 20%;
+    display: flex;
+    flex-wrap: wrap;
 }
 
 .hud-right-container {
@@ -159,6 +174,49 @@
 
 .hud-right-type {
     padding: 15px 15px 0;
+}
+
+.MuiBackdrop-root {
+    background-color: transparent !important;
+}
+
+._mh-container {
+    margin-bottom: 6px;
+    border: 1px solid black;
+    border-radius: 3px;
+    height: 16px;
+    position: relative;
+    background-color: black;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+._mh-inner {
+    height: 100%;
+    position: absolute;
+    left: 0;
+}
+
+.mana-container {
+    background-color: #045B9B;
+}
+
+.health-container {
+    background-color: #039811;
+}
+
+._mh-amount-text {
+    color: white;
+    font-size: 12px;
+    position: absolute;
+}
+
+._mh-regen-text {
+    color: white;
+    font-size: 12px;
+    position: absolute;
+    right: 4px;
 }
 
 .sel-tile-actions {
@@ -210,4 +268,25 @@
 
 .shop-item-selected {
     border: 3px solid gold;
+}
+
+.player-items {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.player-item {
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+}
+
+.player-item-purchased {
+    background-color: #104846;
+}
+
+.player-item-blank {
 }
