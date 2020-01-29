@@ -1,7 +1,11 @@
 import initialState from "./default.reducers";
 import ac from "../_constants/action.constants";
+import ic from "../_constants/item.constants";
+import {getRealMana} from "../_utils/utils.utils";
 
 export function game(state = initialState.game, action) {
+  const {gold, mana, playerItems} = state;
+
   switch (action.type) {
     case ac.selectTile:
       return {
@@ -17,17 +21,18 @@ export function game(state = initialState.game, action) {
         },
       };
     case ac.regenMana:
-      let updatedMana = {...state.mana};
+      let updatedMana = {...mana};
+      let realMana = getRealMana(state);
 
-      if ((state.mana.current + state.mana.regenAmount) >= state.mana.max) {
+      if ((realMana.current + realMana.regenAmount) >= realMana.max) {
         updatedMana = {
-          ...updatedMana,
-          current: state.mana.max,
+          ...mana,
+          current: realMana.max,
         }
       } else {
         updatedMana = {
-          ...updatedMana,
-          current: updatedMana.current + state.mana.regenAmount,
+          ...mana,
+          current: realMana.current + realMana.regenAmount,
         }
       }
 
@@ -54,9 +59,25 @@ export function game(state = initialState.game, action) {
         ...state,
       };
     case ac.buy:
-      console.log(action.item)
+      let {item} = action;
+
+      // cannot buy more than allocated amount
+      if (playerItems >= ic.maxPlayerItems) return state;
+      // cannot but the item if the player does not have the required gold
+      if (gold.current < item.cost) return state;
+
+      let remainingGold = gold.current - item.cost;
+
       return {
         ...state,
+        gold: {
+          ...state.gold,
+          current: remainingGold,
+        },
+        playerItems: [
+          ...state.playerItems,
+          item,
+        ],
       };
     default:
       return state;

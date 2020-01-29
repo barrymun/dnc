@@ -2,7 +2,7 @@ import React from 'react';
 import {Base} from "../_components";
 import gameConstants from "../_constants/game.constants";
 import {store} from "../_helpers";
-import mapActions from "../_actions/game.actions";
+import gameActions from "../_actions/game.actions";
 import Table from "@material-ui/core/Table";
 import TableHead from "@material-ui/core/TableHead";
 import TableRow from "@material-ui/core/TableRow";
@@ -115,7 +115,7 @@ class Main extends Base {
    * @param tile
    */
   populateTileInfo = tile => {
-    store.dispatch(mapActions.selectTile(tile));
+    store.dispatch(gameActions.selectTile(tile));
   };
 
 
@@ -144,7 +144,7 @@ class Main extends Base {
    *
    */
   closeHudRight = () => {
-    store.dispatch(mapActions.selectTile(null));
+    store.dispatch(gameActions.selectTile(null));
   };
 
 
@@ -153,7 +153,7 @@ class Main extends Base {
    * @param tile
    */
   attack = tile => {
-    store.dispatch(mapActions.attack(tile));
+    store.dispatch(gameActions.attack(tile));
   };
 
 

@@ -6,6 +6,12 @@
 export const sleep = seconds => new Promise(r => setTimeout(r, seconds * 1000));
 
 
+/**
+ *
+ * @param array
+ * @param chunkSize
+ * @returns {*}
+ */
 export const createChunks = (array, chunkSize) => {
     return array.reduce((resultArray, item, index) => {
         const chunkIndex = Math.floor(index / chunkSize);
@@ -18,4 +24,28 @@ export const createChunks = (array, chunkSize) => {
 
         return resultArray
     }, []);
+};
+
+
+/**
+ *
+ * @param state
+ * @returns {{max: *, regenAmount: number}}
+ */
+export const getRealMana = state => {
+    const {mana, playerItems} = state;
+
+    let max = mana.max;
+    let regenAmount = mana.regenAmount;  // base
+
+    playerItems.forEach(i => {
+        if (i.playerEffect.mana != null && i.playerEffect.mana.max != null) max += i.playerEffect.mana.max;
+        if (i.playerEffect.mana != null && i.playerEffect.mana.regenAmount != null) regenAmount += i.playerEffect.mana.regenAmount;
+    });
+
+    return {
+        ...mana,
+        max,
+        regenAmount,
+    }
 };

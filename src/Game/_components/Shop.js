@@ -5,16 +5,18 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {store} from "../../_helpers";
-import mapActions from "../../_actions/game.actions";
+import gameActions from "../../_actions/game.actions";
 
 function Shop(props) {
 
-  const {gold, shop} = props;
+  const {gold, shop, playerItems} = props;
 
   const [values, setValues] = React.useState({
     open: false,
     item: null,
   });
+
+  // console.log({playerItems})
 
   const handleOpen = () => setValues({...values, open: true});
 
@@ -27,7 +29,7 @@ function Shop(props) {
   const handleBuy = () => {
     if (values.item == null) return;
 
-    store.dispatch(mapActions.buy(values.item));
+    store.dispatch(gameActions.buy(values.item));
   };
 
   return (<div>
