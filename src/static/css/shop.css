@@ -1,0 +1,60 @@
+.shop-tabs {
+    display: flex;
+}
+
+.shop-tab {
+    border: 1px solid black;
+    padding: 10px;
+    cursor: pointer;
+    border-radius: 3px;
+}
+
+.shop-tab-active {
+    background-color: grey;
+}
+
+.shop-items {
+    display: flex;
+}
+
+.shop-item-container {
+    margin: 4px;
+    border: 1px solid black;
+    border-radius: 3px;
+    padding: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.shop-item {
+    background-color: purple;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.shop-item:hover {
+    opacity: 0.9;
+}
+
+.shop-item-selected {
+    border: 3px solid gold;
+}
+
+.sell-player-item {
+    background-color: teal;
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 4px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.sell-player-item-selected {
+    border: 3px solid gold;
+}

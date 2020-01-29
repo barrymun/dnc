@@ -15,6 +15,7 @@ function Shop(props) {
   const [values, setValues] = React.useState({
     open: false,
     item: null,
+    activeTab: 0,
   });
 
   // console.log({playerItems})
@@ -27,13 +28,95 @@ function Shop(props) {
 
   const deselectItem = () => setValues({...values, item: null});
 
+  const setActiveTab = activeTab => setValues({...values, activeTab, item: null});
+
   const buyDisabled = values.item == null || gold.current < values.item.cost || playerItems.length >= ic.maxPlayerItems;
+
+  const sellDisabled = values.item == null;
 
   const handleBuy = () => {
     if (values.item == null) return;
-
     store.dispatch(gameActions.buy(values.item));
   };
+
+  const handleSell = () => {
+    if (values.item == null) return;
+    store.dispatch(gameActions.sell(values.item));
+  };
+
+  /**
+   *
+   * @returns {*}
+   */
+  const getTabContent = () => {
+    if (values.activeTab === 0) {
+      return (<div className={`shop-items`}>
+        {shop.map((o, index) => (
+          <div
+            key={index}
+            className={`shop-item-container`}
+          >
+            <div>
+              <Tooltip title={o.effect}>
+                <div
+                  onClick={() => selectItem(o)}
+                  className={`shop-item ${values.item != null && values.item.id === o.id ? `shop-item-selected` : ``}`}
+                />
+              </Tooltip>
+            </div>
+            <div>
+              {o.name}
+            </div>
+          </div>
+        ))}
+      </div>)
+    } else if (values.activeTab === 1) {
+      return (<div className={`shop-items`}>
+        {playerItems.map((o, index) => (
+          <div
+            key={index}
+            className={`shop-item-container`}
+          >
+            <div>
+              <Tooltip title={o.effect}>
+                <div
+                  onClick={() => selectItem(o)}
+                  className={`sell-player-item ${values.item != null && values.item.id === o.id ? `sell-player-item-selected` : ``}`}
+                />
+              </Tooltip>
+            </div>
+            <div>
+              {o.name}
+            </div>
+          </div>
+        ))}
+      </div>)
+    }
+  };
+
+
+  /**
+   *
+   * @returns {*}
+   */
+  const getShopButton = () => {
+    if (values.activeTab === 0) {
+      return (<button
+        disabled={buyDisabled}
+        onClick={handleBuy}
+      >
+        Buy
+      </button>);
+    } else if (values.activeTab === 1) {
+      return (<button
+        disabled={sellDisabled}
+        onClick={handleSell}
+      >
+        Sell
+      </button>);
+    }
+  };
+
 
   return (<div>
     <Tooltip title="Click to shop">
@@ -54,38 +137,33 @@ function Shop(props) {
       <DialogTitle>{`Shop`}</DialogTitle>
 
       <DialogContent>
-        <div className={`shop-items`}>
-          {shop.map((o, index) => (
-            <div
-              key={index}
-              className={`shop-item-container`}
-            >
-              <div>
-                <Tooltip title={o.effect}>
-                  <div
-                    onClick={() => selectItem(o)}
-                    className={`shop-item ${values.item != null && values.item.id === o.id ? `shop-item-selected` : ``}`}
-                  />
-                </Tooltip>
-              </div>
-              <div>
-                {o.name}
-              </div>
-            </div>
-          ))}
+        <div className={`shop-tabs`}>
+          <div
+            className={`shop-tab ${values.activeTab === 0 ? `shop-tab-active` : ``}`}
+            onClick={() => setActiveTab(0)}
+          >
+            Buy
+          </div>
+          <div
+            className={`shop-tab ${values.activeTab === 1 ? `shop-tab-active` : ``}`}
+            onClick={() => setActiveTab(1)}
+          >
+            Sell
+          </div>
         </div>
+
+        {/*tab content, dependent on the activeTab state*/}
+        {getTabContent()}
+
       </DialogContent>
 
       <DialogActions>
         <button onClick={handleClose}>
           Close
         </button>
-        <button
-          disabled={buyDisabled}
-          onClick={handleBuy}
-        >
-          Buy
-        </button>
+
+        {getShopButton()}
+
       </DialogActions>
     </Dialog>
   </div>);

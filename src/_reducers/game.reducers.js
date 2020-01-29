@@ -4,7 +4,11 @@ import ic from "../_constants/item.constants";
 import {getRealMana} from "../_utils/utils.utils";
 
 export function game(state = initialState.game, action) {
+  // deconstruct the state
   const {gold, mana, playerItems} = state;
+
+  // set ...
+  let item;
 
   switch (action.type) {
     case ac.selectTile:
@@ -59,7 +63,7 @@ export function game(state = initialState.game, action) {
         ...state,
       };
     case ac.buy:
-      let {item} = action;
+      item = action.item;
 
       // cannot buy more than allocated amount
       if (playerItems.length >= ic.maxPlayerItems) return state;
@@ -78,6 +82,28 @@ export function game(state = initialState.game, action) {
           ...state.playerItems,
           item,
         ],
+      };
+    case ac.sell:
+      item = action.item;
+
+      let updatedGoldCurrent = gold.current + (item.cost / 2);
+      let checked = false;
+      let updatedPlayerItems = playerItems.filter(o => {
+        if (o.id === item.id && !checked) {
+          checked = true;
+          return false;
+        } else {
+          return true;
+        }
+      });
+
+      return {
+        ...state,
+        gold: {
+          ...state.gold,
+          current: updatedGoldCurrent,
+        },
+        playerItems: updatedPlayerItems,
       };
     default:
       return state;
