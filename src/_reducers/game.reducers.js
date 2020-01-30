@@ -4,14 +4,15 @@ import ic from "../_constants/item.constants";
 import {
   getRealMana,
   getRealGold,
+  getRealAttack,
 } from "../_utils/utils.utils";
 
 export function game(state = initialState.game, action) {
   // deconstruct the state
-  const {gold, mana, playerItems} = state;
+  const {gold, mana, playerItems, map, stats} = state;
 
   // set ...
-  let item;
+  let item, tile, playerCity, playerAttack, npcDefence;
 
   switch (action.type) {
     case ac.selectTile:
@@ -64,6 +65,18 @@ export function game(state = initialState.game, action) {
         },
       };
     case ac.attack:
+      tile = action.tile;
+      playerCity = map[0];
+      console.log({tile, playerCity})
+
+      npcDefence = stats.npc.defence;
+      playerAttack = getRealAttack(state).player.attack;
+
+      let npcDefenceCity = Object.keys(tile.troops).reduce((acc, key) => ({...acc, [key]: tile.troops[key] * npcDefence}), ({}));
+      let playerAttackCity = Object.keys(playerCity.troops).reduce((acc, key) => ({...acc, [key]: playerCity.troops[key] * playerAttack}), ({}));
+      console.log({npcDefence, playerAttack})
+      console.log({npcDefenceCity, playerAttackCity})
+
       return {
         ...state,
       };

@@ -12,6 +12,16 @@ import tc from "../_constants/troop.constants";
 let state = {
   game: {
     map: {},
+    stats: {
+      player: {
+        attack: 100,
+        defence: 100,
+      },
+      npc: {
+        attack: 100,
+        defence: 100,
+      },
+    },
     selectedTile: null,
     level: {
       current: 1,
@@ -28,12 +38,10 @@ let state = {
       regenAmount: 3.0,
     },
     troopGen: {
-      [tc.war]: 10,
-      [tc.lgn]: 4,
-      [tc.arc]: 6,
-      [tc.pult]: 2,
-      [tc.mage]: 3,
-      [tc.sorc]: 1,
+      [tc.warrior]: 10,
+      [tc.swordsman]: 6,
+      [tc.archer]: 3,
+      [tc.cavalry]: 2,
     },
     shop: [
       {
@@ -58,6 +66,17 @@ let state = {
           },
         },
       },
+      {
+        id: 3,
+        name: `attack power`,
+        effect: `+10.0 attack`,
+        cost: 400,
+        playerEffect: {
+          player: {
+            attack: 10,
+          },
+        },
+      },
     ],
     playerItems: [],
   },
@@ -75,12 +94,10 @@ for (let i = 0; i < (d * d); i++) {
     y: parseInt(i % d),
     type: gameConstants.typeFlat,
     troops: {
-      [tc.war]: 300,
-      [tc.lgn]: 200,
-      [tc.arc]: 100,
-      [tc.pult]: 50,
-      [tc.mage]: 0,
-      [tc.sorc]: 0,
+      [tc.warrior]: 300,
+      [tc.swordsman]: 200,
+      [tc.archer]: 100,
+      [tc.cavalry]: 50,
     },
   }
 }
@@ -90,12 +107,10 @@ for (let i = 0; i < (d * d); i++) {
  */
 state.game.map[0].type = gameConstants.typePlayerCity;
 state.game.map[0].troops = {
-  [tc.war]: 500,
-  [tc.lgn]: 500,
-  [tc.arc]: 500,
-  [tc.pult]: 500,
-  [tc.mage]: 500,
-  [tc.sorc]: 500,
+  [tc.warrior]: 1000,
+  [tc.swordsman]: 600,
+  [tc.archer]: 300,
+  [tc.cavalry]: 200,
 };
 
 /**
@@ -107,12 +122,10 @@ NPCTowers.forEach(i => {
     ...state.game.map[i],
     type: gameConstants.typeNPCTower,
     troops: {
-      [tc.war]: 10000,
-      [tc.lgn]: 50000,
-      [tc.arc]: 5000,
-      [tc.pult]: 10000,
-      [tc.mage]: 2000,
-      [tc.sorc]: 8000,
+      [tc.warrior]: 10000,
+      [tc.swordsman]: 25000,
+      [tc.archer]: 5000,
+      [tc.cavalry]: 2000,
     },
   };
 });
@@ -123,12 +136,10 @@ NPCBase.forEach(i => {
     ...state.game.map[i],
     type: gameConstants.typeNPCBase,
     troops: {
-      [tc.war]: 50000,
-      [tc.lgn]: 300000,
-      [tc.arc]: 25000,
-      [tc.pult]: 80000,
-      [tc.mage]: 20000,
-      [tc.sorc]: 50000,
+      [tc.warrior]: 100000,
+      [tc.swordsman]: 500000,
+      [tc.archer]: 50000,
+      [tc.cavalry]: 15000,
     },
   };
 });

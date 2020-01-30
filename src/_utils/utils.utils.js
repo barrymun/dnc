@@ -70,3 +70,27 @@ export const getRealGold = state => {
         regenAmount,
     }
 };
+
+
+/**
+ *
+ * @param state
+ * @returns {{player: {attack: number}}}
+ */
+export const getRealAttack = state => {
+    const {stats, playerItems} = state;
+
+    let attack = stats.player.attack;
+
+    playerItems.forEach(i => {
+        if (i.playerEffect.player != null && i.playerEffect.player.attack != null) attack += i.playerEffect.player.attack;
+    });
+
+    return {
+        ...stats,
+        player: {
+            ...stats.player,
+            attack,
+        },
+    }
+};

@@ -17,7 +17,7 @@ function Shop(props) {
   const [values, setValues] = React.useState({
     open: false,
     item: null,
-    activeTab: 0,
+    activeTab: 0,  // 0 is buy, 1 is sell
   });
 
   // console.log({playerItems})
@@ -67,6 +67,9 @@ function Shop(props) {
               </Tooltip>
             </div>
             <div>
+              {o.cost}
+            </div>
+            <div>
               {o.name}
             </div>
           </div>
@@ -86,6 +89,10 @@ function Shop(props) {
                   className={`sell-player-item ${values.item != null && values.item.id === o.id ? `sell-player-item-selected` : ``}`}
                 />
               </Tooltip>
+            </div>
+            <div>
+              {/*divide by 2 for visual purposes*/}
+              {o.cost / 2}
             </div>
             <div>
               {o.name}
