@@ -2,9 +2,9 @@ import initialState from "./default.reducers";
 import ac from "../_constants/action.constants";
 import ic from "../_constants/item.constants";
 import {
-  getRealMana,
-  getRealGold,
-  getRealAttack,
+  getManaBoost,
+  getGoldBoost,
+  getRealAttack, getTroopStatsBoost,
 } from "../_utils/utils.utils";
 
 export function game(state = initialState.game, action) {
@@ -21,7 +21,7 @@ export function game(state = initialState.game, action) {
         selectedTile: action.selectedTile,
       };
     case ac.regenGold:
-      let realGold = getRealGold(state);
+      let realGold = getGoldBoost(state);
 
       return {
         ...state,
@@ -32,7 +32,7 @@ export function game(state = initialState.game, action) {
       };
     case ac.regenMana:
       let updatedMana = {...mana};
-      let realMana = getRealMana(state);
+      let realMana = getManaBoost(state);
 
       if ((realMana.current + realMana.regenAmount) >= realMana.max) {
         updatedMana = {
@@ -67,15 +67,17 @@ export function game(state = initialState.game, action) {
     case ac.attack:
       tile = action.tile;
       playerCity = map[0];
-      console.log({tile, playerCity})
+      // console.log({tile, playerCity})
 
-      npcDefence = stats.npc.defence;
-      playerAttack = getRealAttack(state).player.attack;
+      getTroopStatsBoost(state);
 
-      let npcDefenceCity = Object.keys(tile.troops).reduce((acc, key) => ({...acc, [key]: tile.troops[key] * npcDefence}), ({}));
-      let playerAttackCity = Object.keys(playerCity.troops).reduce((acc, key) => ({...acc, [key]: playerCity.troops[key] * playerAttack}), ({}));
-      console.log({npcDefence, playerAttack})
-      console.log({npcDefenceCity, playerAttackCity})
+      // npcDefence = stats.npc.defence;
+      // playerAttack = getRealAttack(state).player.attack;
+      //
+      // let npcDefenceCity = Object.keys(tile.troops).reduce((acc, key) => ({...acc, [key]: tile.troops[key] * npcDefence}), ({}));
+      // let playerAttackCity = Object.keys(playerCity.troops).reduce((acc, key) => ({...acc, [key]: playerCity.troops[key] * playerAttack}), ({}));
+      // console.log({npcDefence, playerAttack})
+      // console.log({npcDefenceCity, playerAttackCity})
 
       return {
         ...state,

@@ -1,5 +1,5 @@
 import React from 'react';
-import {getRealMana} from "../_utils/utils.utils";
+import {getManaBoost} from "../_utils/utils.utils";
 
 class Base extends React.Component {
 
@@ -9,7 +9,7 @@ class Base extends React.Component {
   constructor(props) {
     super(props);
     this.setStateAsync = this.setStateAsync.bind(this);
-    this.getRealMana = this.getRealMana.bind(this);
+    this.getManaBoost = this.getManaBoost.bind(this);
   }
 
 
@@ -27,8 +27,8 @@ class Base extends React.Component {
    *
    * @returns {{max: *, regenAmount: number}}
    */
-  getRealMana() {
-    return getRealMana(this.props);
+  getManaBoost() {
+    return getManaBoost(this.props);
   }
 
 }

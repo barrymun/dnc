@@ -12,16 +12,6 @@ import tc from "../_constants/troop.constants";
 let state = {
   game: {
     map: {},
-    stats: {
-      player: {
-        attack: 100,
-        defence: 100,
-      },
-      npc: {
-        attack: 100,
-        defence: 100,
-      },
-    },
     selectedTile: null,
     level: {
       current: 1,
@@ -43,6 +33,7 @@ let state = {
       [tc.archer]: 3,
       [tc.cavalry]: 2,
     },
+    troopStats: tc.baseTroopStats,
     shop: [
       {
         id: 1,
@@ -72,8 +63,11 @@ let state = {
         effect: `+10.0 attack`,
         cost: 400,
         playerEffect: {
-          player: {
+          troopStats: {  //  applies to all troops
             attack: 10,
+            defence: 0,
+            range: 0,
+            speed: 0,
           },
         },
       },

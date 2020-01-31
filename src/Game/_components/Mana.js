@@ -1,8 +1,8 @@
 import React from 'react';
-import {getRealMana} from "../../_utils/utils.utils";
+import {getManaBoost} from "../../_utils/utils.utils";
 
 function Mana(props) {
-    const mana = getRealMana(props);
+    const mana = getManaBoost(props);
     let n = mana.current;
     let d = mana.max;
 
