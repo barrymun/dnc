@@ -1,6 +1,3 @@
-import tc from "../_constants/troop.constants";
-
-
 /**
  *
  * @param seconds
@@ -81,19 +78,11 @@ export const getGoldBoost = state => {
  * @returns {*}
  */
 export const getTroopStatsBoost = state => {
-  const {troopStats, playerItems} = state;
-  console.log({troopStats, playerItems})
-
-  // return {
-  //   ...troopStats,
-  // }
-
-  // let updatedTroopStats = tc.baseTroopStats;
-  // console.log({updatedTroopStats})
+  let {troopStats, playerItems} = state;
 
   playerItems.forEach(o => {
     if (o.playerEffect.troopStats == null) return;
-    let x = Object.keys(troopStats).reduce((acc1, key1) => {
+    troopStats = Object.keys(troopStats).reduce((acc1, key1) => {
       return {
         ...acc1,
         [key1]: Object.keys(troopStats[key1]).reduce((acc2, key2) => {
@@ -104,52 +93,8 @@ export const getTroopStatsBoost = state => {
         }, ({}))
       }
     }, ({}))
-    console.log({x})
-  })
+  });
 
-  console.log({troopStats})
-
-
-  // playerItems.forEach(o => {
-  //   if (o.playerEffect.troopStats == null) return;
-  //   Object.keys(updatedTroopStats).forEach(key1 => {
-  //     Object.keys(updatedTroopStats[key1]).forEach(key2 => {
-  //       updatedTroopStats = {
-  //         ...updatedTroopStats,
-  //         [key1]: {
-  //           ...updatedTroopStats[key1],
-  //           [key2]: updatedTroopStats[key1][key2] += o.playerEffect.troopStats[key2]
-  //         }
-  //       }
-  //     });
-  //   });
-  // });
-
-  // console.log({updatedTroopStats})
-
-
-  // playerItems.reduce((acc, o) => {
-  //   if (o.playerEffect.troopStats == null) return acc;
-  // }, ({}));
-
-
-  return {
-    ...troopStats,
-  }
-
-
-  // let attack = troopStats.attack;
-  //
-  // playerItems.forEach(i => {
-  //     if (i.playerEffect.troopStats != null && i.playerEffect.troopStats.attack != null) attack += i.playerEffect.troopStats.attack;
-  // });
-  //
-  // return {
-  //     ...stats,
-  //     player: {
-  //         ...stats.player,
-  //         attack,
-  //     },
-  // }
+  return troopStats;
 
 };
