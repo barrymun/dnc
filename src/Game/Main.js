@@ -228,10 +228,10 @@ class Main extends Base {
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {Object.keys(selectedTile.troops).map((row, index) => (
+                  {Object.keys(selectedTile.troopCount).map((row, index) => (
                     <TableRow key={index}>
                       <TableCell>{row}</TableCell>
-                      <TableCell>{selectedTile.troops[row]}</TableCell>
+                      <TableCell>{selectedTile.troopCount[row]}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>

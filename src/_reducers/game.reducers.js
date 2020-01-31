@@ -4,15 +4,16 @@ import ic from "../_constants/item.constants";
 import {
   getManaBoost,
   getGoldBoost,
-  getRealAttack, getTroopStatsBoost,
+  getTroopStatsBoost,
 } from "../_utils/utils.utils";
+import {Attack} from "../_utils/attack.utils";
 
 export function game(state = initialState.game, action) {
   // deconstruct the state
-  const {gold, mana, playerItems, map, stats} = state;
+  const {gold, mana, playerItems, map, troopStats} = state;
 
   // set ...
-  let item, tile, playerCity, playerAttack, npcDefence;
+  let item, npcCity, playerCity, playerAttack, npcDefence;
 
   switch (action.type) {
     case ac.selectTile:
@@ -51,7 +52,7 @@ export function game(state = initialState.game, action) {
         mana: updatedMana,
       };
     case ac.regenTroops:
-      let playerTroops = state.map[0].troops;
+      let playerTroops = state.map[0].troopCount;
       Object.keys(playerTroops).forEach(key => playerTroops[key] += state.troopGen[key]);
 
       return {
@@ -60,24 +61,25 @@ export function game(state = initialState.game, action) {
           ...state.map,
           0: {
             ...state.map[0],
-            troops: playerTroops,
+            troopCount: playerTroops,
           },
         },
       };
     case ac.attack:
-      tile = action.tile;
-      playerCity = map[0];
-      // console.log({tile, playerCity})
-
-      getTroopStatsBoost(state);
-
-      // npcDefence = stats.npc.defence;
-      // playerAttack = getRealAttack(state).player.attack;
+      // npcCity = action.tile;
+      // playerCity = map[0];
+      // // console.log({npcCity, playerCity})
       //
-      // let npcDefenceCity = Object.keys(tile.troops).reduce((acc, key) => ({...acc, [key]: tile.troops[key] * npcDefence}), ({}));
-      // let playerAttackCity = Object.keys(playerCity.troops).reduce((acc, key) => ({...acc, [key]: playerCity.troops[key] * playerAttack}), ({}));
-      // console.log({npcDefence, playerAttack})
-      // console.log({npcDefenceCity, playerAttackCity})
+      // let r = getTroopStatsBoost(state);
+      // console.log({r})
+      //
+      // let remainingNpcTroops = Object.values(npcCity.troopCount).reduce((acc, value) => acc + value);
+      // let remainingPlayerTroops = Object.values(playerCity.troopCount).reduce((acc, value) => acc + value);
+      // console.log({remainingNpcTroops, remainingPlayerTroops})
+
+      let attack = new Attack(state)
+
+
 
       return {
         ...state,

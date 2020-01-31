@@ -87,7 +87,7 @@ for (let i = 0; i < (d * d); i++) {
     x: parseInt(i / d),
     y: parseInt(i % d),
     type: gameConstants.typeFlat,
-    troops: {
+    troopCount: {
       [tc.warrior]: 300,
       [tc.swordsman]: 200,
       [tc.archer]: 100,
@@ -100,7 +100,7 @@ for (let i = 0; i < (d * d); i++) {
  * first tile on map (0,0) is the player city
  */
 state.game.map[0].type = gameConstants.typePlayerCity;
-state.game.map[0].troops = {
+state.game.map[0].troopCount = {
   [tc.warrior]: 1000,
   [tc.swordsman]: 600,
   [tc.archer]: 300,
@@ -115,7 +115,7 @@ NPCTowers.forEach(i => {
   state.game.map[i] = {
     ...state.game.map[i],
     type: gameConstants.typeNPCTower,
-    troops: {
+    troopCount: {
       [tc.warrior]: 10000,
       [tc.swordsman]: 25000,
       [tc.archer]: 5000,
@@ -129,7 +129,7 @@ NPCBase.forEach(i => {
   state.game.map[i] = {
     ...state.game.map[i],
     type: gameConstants.typeNPCBase,
-    troops: {
+    troopCount: {
       [tc.warrior]: 100000,
       [tc.swordsman]: 500000,
       [tc.archer]: 50000,
