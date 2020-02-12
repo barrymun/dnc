@@ -4,16 +4,15 @@ import ic from "../_constants/item.constants";
 import {
   getManaBoost,
   getGoldBoost,
-  getTroopStatsBoost,
 } from "../_utils/utils.utils";
 import {Attack} from "../_utils/attack.utils";
 
 export function game(state = initialState.game, action) {
   // deconstruct the state
-  const {gold, mana, playerItems, map, troopStats} = state;
+  const {gold, mana, playerItems} = state;
 
   // set ...
-  let item, npcCity, playerCity, playerAttack, npcDefence;
+  let item;
 
   switch (action.type) {
     case ac.selectTile:

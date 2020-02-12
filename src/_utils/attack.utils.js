@@ -75,7 +75,7 @@ class Attack {
 
       this.move();
       this.defend();
-      this.setRoundsRemaining(this.roundsRemaining - 1)
+      this.setRoundsRemaining(this.roundsRemaining - 1);
       // break;  // 1 iteration only for now
     }
   };
@@ -91,25 +91,45 @@ class Attack {
         : 0
     });
     this.setAttackersDistance(attackersDistance);
-    console.log(this.attackersDistance)
+    // console.log(this.attackersDistance)
 
   };
 
 
   defend = () => {
     const {
-      map,
       troopStats,  // stats for defenders
+      // map,  // used to get the player city
+      // selectedTile,  // tile being attacked
     } = this.state;
 
-    // console.log(this.attackersDistance)
+    let rangeMap = Object.keys(troopStats).map(key => ({name: key, ...troopStats[key]}));
+    // ascending sort: attacking troops with lowest range get attacked first
+    rangeMap.sort((a, b) => a.range - b.range);
+    console.log({rangeMap})
 
-    Object.keys(troopStats).forEach(defKey => {
-      Object.keys(troopStats).forEach(atkKey => {
-        // console.log(troopStats[defKey].range, this.attackersDistance[atkKey])
-        if (troopStats[defKey].range >= this.attackersDistance[atkKey]) console.log(`YES_${defKey}_${atkKey}`)
+    // descending order: defending troops with highest range attack first
+    let revRangeMap = [...rangeMap].reverse();
+
+    revRangeMap.forEach(defender => {
+
+      // attacking troops (keys) in range of the defenders for this round
+      let inRange = [];
+
+      rangeMap.forEach(attacker => {
+        // check each attacking troop against each defending troop for range
+        // add each attacker (in range of the defenders) to the list
+        // anything in this list will be attacked by every defending troop
+        // defending troops with highest range will attack first
+        // attacking troops with lowest range will be attacked first
+
+        if (defender.range >= this.attackersDistance[attacker.name]) inRange = [...inRange, attacker];
       });
+
+      console.log({inRange})
+
     });
+
   };
 
 }
