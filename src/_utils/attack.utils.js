@@ -17,7 +17,8 @@ class Attack {
 
 
   state = {};
-  round = 1;
+  currentRound = 1;
+  roundsRemaining = 20;
   distance = 1000;  // TODO: make this a constant
   attackersDistance = {
     [tc.warrior]: this.distance,
@@ -27,7 +28,7 @@ class Attack {
   };
 
 
-  setState = (state) => {
+  setState = state => {
     this.state = {
       ...this.state,
       ...state,
@@ -35,18 +36,23 @@ class Attack {
   };
 
 
-  setRound = (round) => {
-    this.round = round;
+  setRound = currentRound => {
+    this.currentRound = currentRound;
   };
 
 
-  setDistance = (distance) => {
+  setDistance = distance => {
     this.distance = distance;
   };
 
 
-  setAttackersDistance = (attackersDistance) => {
+  setAttackersDistance = attackersDistance => {
     this.attackersDistance = attackersDistance;
+  };
+
+
+  setRoundsRemaining = roundsRemaining => {
+    this.roundsRemaining = roundsRemaining;
   };
 
 
@@ -64,28 +70,46 @@ class Attack {
 
   fight = () => {
 
-    while (this.getRemainingNpcTroops() > 0 && this.getRemainingPlayerTroops() > 0) {
+    while (this.getRemainingNpcTroops() > 0 && this.getRemainingPlayerTroops() > 0 && this.roundsRemaining > 0) {
       // both must have troops in order for the rounds to continue
 
       this.move();
-      break;  // 1 iteration only for now
+      this.defend();
+      this.setRoundsRemaining(this.roundsRemaining - 1)
+      // break;  // 1 iteration only for now
     }
   };
 
 
   move = () => {
     let troopStats = getTroopStatsBoost(this.state);
-    console.log({troopStats})
-
-    let attackersDistance = {}
+    let attackersDistance = {};
 
     Object.keys(troopStats).forEach(key => {
       attackersDistance[key] = (this.attackersDistance[key] - troopStats[key].speed) >= 0
         ? this.attackersDistance[key] - troopStats[key].speed
         : 0
     });
-    this.setAttackersDistance(attackersDistance)
+    this.setAttackersDistance(attackersDistance);
     console.log(this.attackersDistance)
+
+  };
+
+
+  defend = () => {
+    const {
+      map,
+      troopStats,  // stats for defenders
+    } = this.state;
+
+    // console.log(this.attackersDistance)
+
+    Object.keys(troopStats).forEach(defKey => {
+      Object.keys(troopStats).forEach(atkKey => {
+        // console.log(troopStats[defKey].range, this.attackersDistance[atkKey])
+        if (troopStats[defKey].range >= this.attackersDistance[atkKey]) console.log(`YES_${defKey}_${atkKey}`)
+      });
+    });
   };
 
 }
