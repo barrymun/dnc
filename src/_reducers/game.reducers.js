@@ -1,3 +1,4 @@
+import _ from "lodash";
 import initialState from "./default.reducers";
 import ac from "../_constants/action.constants";
 import ic from "../_constants/item.constants";
@@ -76,7 +77,7 @@ export function game(state = initialState.game, action) {
       // let remainingPlayerTroops = Object.values(playerCity.troopCount).reduce((acc, value) => acc + value);
       // console.log({remainingNpcTroops, remainingPlayerTroops})
 
-      let attack = new Attack(state)
+      let attack = new Attack(_.cloneDeep(state))
 
 
 

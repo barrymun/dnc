@@ -18,7 +18,7 @@ class Attack {
 
   state = {};
   currentRound = 1;
-  roundsRemaining = 20;
+  roundsRemaining = 100;
   distance = 1000;  // TODO: make this a constant
   attackersDistance = {
     [tc.warrior]: this.distance,
@@ -51,6 +51,11 @@ class Attack {
   };
 
 
+  getRoundsRemaining = () => {
+    return this.roundsRemaining;
+  };
+
+
   setRoundsRemaining = roundsRemaining => {
     this.roundsRemaining = roundsRemaining;
   };
@@ -70,12 +75,13 @@ class Attack {
 
   fight = () => {
 
-    while (this.getRemainingNpcTroops() > 0 && this.getRemainingPlayerTroops() > 0 && this.roundsRemaining > 0) {
+    while (this.getRemainingNpcTroops() > 0 && this.getRemainingPlayerTroops() > 0 && this.getRoundsRemaining() > 0) {
       // both must have troops in order for the rounds to continue
 
       this.move();
       this.defend();
-      this.setRoundsRemaining(this.roundsRemaining - 1);
+      this.setRoundsRemaining(this.getRoundsRemaining() - 1);
+      console.log(`-----`)
       // break;  // 1 iteration only for now
     }
   };
@@ -99,22 +105,18 @@ class Attack {
   defend = () => {
     const {
       troopStats,  // stats for defenders
-      // map,  // used to get the player city
-      // selectedTile,  // tile being attacked
+      map,  // used to get the player city
+      selectedTile,  // tile being attacked
     } = this.state;
 
     let rangeMap = Object.keys(troopStats).map(key => ({name: key, ...troopStats[key]}));
     // ascending sort: attacking troops with lowest range get attacked first
     rangeMap.sort((a, b) => a.range - b.range);
-    console.log({rangeMap})
 
     // descending order: defending troops with highest range attack first
     let revRangeMap = [...rangeMap].reverse();
 
     revRangeMap.forEach(defender => {
-
-      // attacking troops (keys) in range of the defenders for this round
-      let inRange = [];
 
       rangeMap.forEach(attacker => {
         // check each attacking troop against each defending troop for range
@@ -123,10 +125,21 @@ class Attack {
         // defending troops with highest range will attack first
         // attacking troops with lowest range will be attacked first
 
-        if (defender.range >= this.attackersDistance[attacker.name]) inRange = [...inRange, attacker];
-      });
+        if (defender.range >= this.attackersDistance[attacker.name]) {
+          let defendingForce = selectedTile.troopCount[defender.name] * troopStats[defender.name].defence;
+          let attackingForce = map[0].troopCount[attacker.name] * troopStats[attacker.name].attack;
 
-      console.log({inRange})
+          if (defendingForce >= attackingForce) {
+            map[0].troopCount[attacker.name] = 0;
+            selectedTile.troopCount[defender.name] = ~~((defendingForce - attackingForce) / troopStats[defender.name].defence);
+          } else {
+            map[0].troopCount[attacker.name] = ~~((attackingForce - defendingForce) / troopStats[attacker.name].attack);
+            selectedTile.troopCount[defender.name] = 0;
+          }
+          // console.log(map[0].troopCount, selectedTile.troopCount)
+        }
+
+      });
 
     });
 
