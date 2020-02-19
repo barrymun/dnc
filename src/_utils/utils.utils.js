@@ -56,7 +56,7 @@ export const getManaBoost = state => {
  * @param state
  * @returns {{regenAmount: number}}
  */
-export const getGoldBoost = state => {
+export const goldBoost = state => {
   const {gold, playerItems} = state;
 
   let regenAmount = gold.regenAmount;
@@ -77,7 +77,7 @@ export const getGoldBoost = state => {
  * @param state
  * @returns {*}
  */
-export const getTroopStatsBoost = state => {
+export const troopStatsBoost = state => {
   let {troopStats, playerItems} = state;
 
   playerItems.forEach(o => {

@@ -4,7 +4,7 @@ import ac from "../_constants/action.constants";
 import ic from "../_constants/item.constants";
 import {
   getManaBoost,
-  getGoldBoost,
+  goldBoost,
 } from "../_utils/utils.utils";
 import {Attack} from "../_utils/attack.utils";
 
@@ -22,7 +22,7 @@ export function game(state = initialState.game, action) {
         selectedTile: action.selectedTile,
       };
     case ac.regenGold:
-      let realGold = getGoldBoost(state);
+      let realGold = goldBoost(state);
 
       return {
         ...state,

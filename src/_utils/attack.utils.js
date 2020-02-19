@@ -3,7 +3,7 @@
  */
 
 import tc from "../_constants/troop.constants";
-import {getTroopStatsBoost} from "./utils.utils";
+import {troopStatsBoost} from "./utils.utils";
 
 
 class Attack {
@@ -36,8 +36,18 @@ class Attack {
   };
 
 
+  getRound = () => {
+    return this.currentRound;
+  };
+
+
   setRound = currentRound => {
     this.currentRound = currentRound;
+  };
+
+
+  getDistance = () => {
+    return this.distance;
   };
 
 
@@ -78,17 +88,20 @@ class Attack {
     while (this.getRemainingNpcTroops() > 0 && this.getRemainingPlayerTroops() > 0 && this.getRoundsRemaining() > 0) {
       // both must have troops in order for the rounds to continue
 
+      console.log(`BEFORE`, this.state.map[0].troopCount, this.state.selectedTile.troopCount)
       this.move();
       this.defend();
+      this.attack();
       this.setRoundsRemaining(this.getRoundsRemaining() - 1);
-      console.log(`-----`)
+      console.log(`AFTER`, this.state.map[0].troopCount, this.state.selectedTile.troopCount)
+      console.log(`----- ROUNDS LEFT: `, this.getRoundsRemaining())
       // break;  // 1 iteration only for now
     }
   };
 
 
   move = () => {
-    let troopStats = getTroopStatsBoost(this.state);
+    let troopStats = troopStatsBoost(this.state);
     let attackersDistance = {};
 
     Object.keys(troopStats).forEach(key => {
@@ -102,6 +115,11 @@ class Attack {
   };
 
 
+  /**
+   * defenders attack the attackers first
+   * this is essentially a free attack on the attackers (by the defenders)
+   * defenders troop counts will remain unchanged after defending
+   */
   defend = () => {
     const {
       troopStats,  // stats for defenders
@@ -126,8 +144,48 @@ class Attack {
         // attacking troops with lowest range will be attacked first
 
         if (defender.range >= this.attackersDistance[attacker.name]) {
-          let defendingForce = selectedTile.troopCount[defender.name] * troopStats[defender.name].defence;
-          let attackingForce = map[0].troopCount[attacker.name] * troopStats[attacker.name].attack;
+          let defendingForce = selectedTile.troopCount[defender.name] * troopStats[defender.name].attack;  // defenders attacking
+          let attackingForce = map[0].troopCount[attacker.name] * troopStats[attacker.name].defence;  // attackers defending
+
+          if (defendingForce >= attackingForce) {
+            map[0].troopCount[attacker.name] = 0;
+          } else {
+            map[0].troopCount[attacker.name] = ~~((attackingForce - defendingForce) / troopStats[attacker.name].defence);
+          }
+        }
+
+      });
+
+    });
+
+  };
+
+
+  /**
+   * attackers attack the defenders
+   */
+  attack = () => {
+    const {
+      map,  // used to get the player city
+      selectedTile,  // tile being attacked
+    } = this.state;
+
+    // stats for attackers (when retrieving range)
+    let troopStats = troopStatsBoost(this.state);
+    let rangeMap = Object.keys(troopStats).map(key => ({name: key, ...troopStats[key]}));
+    // ascending sort: defending troops with lowest range get attacked first
+    rangeMap.sort((a, b) => a.range - b.range);
+
+    // descending order: attacking troops with highest range attack first
+    let revRangeMap = [...rangeMap].reverse();
+
+    revRangeMap.forEach(attacker => {
+
+      rangeMap.forEach(defender => {
+
+        if (attacker.range >= this.attackersDistance[attacker.name]) {
+          let defendingForce = selectedTile.troopCount[defender.name] * troopStats[defender.name].defence;  // defenders defending
+          let attackingForce = map[0].troopCount[attacker.name] * troopStats[attacker.name].attack;  // attackers attacking
 
           if (defendingForce >= attackingForce) {
             map[0].troopCount[attacker.name] = 0;
@@ -136,12 +194,11 @@ class Attack {
             map[0].troopCount[attacker.name] = ~~((attackingForce - defendingForce) / troopStats[attacker.name].attack);
             selectedTile.troopCount[defender.name] = 0;
           }
-          // console.log(map[0].troopCount, selectedTile.troopCount)
         }
 
       });
-
     });
+
 
   };
 
