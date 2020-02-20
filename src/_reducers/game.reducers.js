@@ -1,11 +1,7 @@
-import _ from "lodash";
 import initialState from "./default.reducers";
 import ac from "../_constants/action.constants";
 import ic from "../_constants/item.constants";
-import {
-  getManaBoost,
-  goldBoost,
-} from "../_utils/utils.utils";
+import {getManaBoost, goldBoost,} from "../_utils/utils.utils";
 import {Attack} from "../_utils/attack.utils";
 
 export function game(state = initialState.game, action) {
@@ -66,23 +62,13 @@ export function game(state = initialState.game, action) {
         },
       };
     case ac.attack:
-      // npcCity = action.tile;
-      // playerCity = map[0];
-      // // console.log({npcCity, playerCity})
-      //
-      // let r = getTroopStatsBoost(state);
-      // console.log({r})
-      //
-      // let remainingNpcTroops = Object.values(npcCity.troopCount).reduce((acc, value) => acc + value);
-      // let remainingPlayerTroops = Object.values(playerCity.troopCount).reduce((acc, value) => acc + value);
-      // console.log({remainingNpcTroops, remainingPlayerTroops})
-
-      let attack = new Attack(_.cloneDeep(state))
-
-
+      // console.log(state.map[0].troopCount, state.selectedTile.troopCount)
+      let attack = new Attack(state);
+      let newState = attack.getState();
+      // console.log(newState.map[0].troopCount, newState.selectedTile.troopCount)
 
       return {
-        ...state,
+        ...newState,
       };
     case ac.buy:
       item = action.item;

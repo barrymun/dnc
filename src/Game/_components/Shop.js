@@ -28,7 +28,7 @@ function Shop(props) {
 
   const selectItem = item => setValues({...values, item});
 
-  const deselectItem = () => setValues({...values, item: null});
+  // const deselectItem = () => setValues({...values, item: null});
 
   const setActiveTab = activeTab => setValues({...values, activeTab, item: null});
 

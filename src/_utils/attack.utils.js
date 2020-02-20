@@ -4,6 +4,7 @@
 
 import tc from "../_constants/troop.constants";
 import {troopStatsBoost} from "./utils.utils";
+import _ from "lodash";
 
 
 class Attack {
@@ -11,7 +12,7 @@ class Attack {
   constructor(props) {
     console.log({props});
     if (props == null) throw new Error("incorrect config");
-    this.setState(props);
+    this.setState(_.cloneDeep(props));
     this.fight();
   }
 
@@ -25,6 +26,11 @@ class Attack {
     [tc.swordsman]: this.distance,
     [tc.archer]: this.distance,
     [tc.cavalry]: this.distance,
+  };
+
+
+  getState = () => {
+    return this.state;
   };
 
 
@@ -83,23 +89,28 @@ class Attack {
   };
 
 
+  /**
+   *
+   */
   fight = () => {
 
+    // both must have troops in order for the rounds to continue
     while (this.getRemainingNpcTroops() > 0 && this.getRemainingPlayerTroops() > 0 && this.getRoundsRemaining() > 0) {
-      // both must have troops in order for the rounds to continue
 
-      console.log(`BEFORE`, this.state.map[0].troopCount, this.state.selectedTile.troopCount)
+      // console.log(`BEFORE`, this.state.map[0].troopCount, this.state.selectedTile.troopCount)
       this.move();
       this.defend();
       this.attack();
       this.setRoundsRemaining(this.getRoundsRemaining() - 1);
-      console.log(`AFTER`, this.state.map[0].troopCount, this.state.selectedTile.troopCount)
-      console.log(`----- ROUNDS LEFT: `, this.getRoundsRemaining())
-      // break;  // 1 iteration only for now
+      // console.log(`AFTER`, this.state.map[0].troopCount, this.state.selectedTile.troopCount)
+      // console.log(`----- ROUNDS LEFT: `, this.getRoundsRemaining())
     }
   };
 
 
+  /**
+   * advance the attackers by their given "speeds"
+   */
   move = () => {
     let troopStats = troopStatsBoost(this.state);
     let attackersDistance = {};
