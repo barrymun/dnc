@@ -41,6 +41,7 @@ let state = {
         effect: `+1.5 mana regen`,
         cost: 300,
         playerEffect: {
+          mathematicalOp: `add`,
           mana: {
             regenAmount: 1.5,
           },
@@ -52,6 +53,7 @@ let state = {
         effect: `+0.2 gold regen`,
         cost: 400,
         playerEffect: {
+          mathematicalOp: `add`,
           gold: {
             regenAmount: 0.2,
           },
@@ -63,10 +65,26 @@ let state = {
         effect: `+10.0 attack`,
         cost: 400,
         playerEffect: {
+          mathematicalOp: `add`,
           troopStats: {  //  applies to all troops
             attack: 10,
             defence: 0,
             range: 0,
+            speed: 0,
+          },
+        },
+      },
+      {
+        id: 4,
+        name: `range boost`,
+        effect: `+15% range`,
+        cost: 400,
+        playerEffect: {
+          mathematicalOp: `multiply`,
+          troopStats: {  //  applies to all troops
+            attack: 0,
+            defence: 0,
+            range: 15,
             speed: 0,
           },
         },

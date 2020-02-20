@@ -10,9 +10,12 @@ import _ from "lodash";
 class Attack {
 
   constructor(props) {
-    console.log({props});
     if (props == null) throw new Error("incorrect config");
+    // deep clone and set the state so that we can easily modify without altering the global state accidentally
     this.setState(_.cloneDeep(props));
+    // boost the player's stats for calculation purposes
+    this.setBoostedTroopStats(troopStatsBoost(this.getState()));
+    console.log({props});
     this.fight();
   }
 
@@ -27,6 +30,7 @@ class Attack {
     [tc.archer]: this.distance,
     [tc.cavalry]: this.distance,
   };
+  boostedTroopStats = null;
 
 
   getState = () => {
@@ -89,6 +93,16 @@ class Attack {
   };
 
 
+  getBoostedTroopStats = () => {
+    return this.boostedTroopStats;
+  };
+
+
+  setBoostedTroopStats = boostedTroopStats => {
+    this.boostedTroopStats = boostedTroopStats;
+  };
+
+
   /**
    *
    */
@@ -112,7 +126,7 @@ class Attack {
    * advance the attackers by their given "speeds"
    */
   move = () => {
-    let troopStats = troopStatsBoost(this.state);
+    let troopStats = this.getBoostedTroopStats();
     let attackersDistance = {};
 
     Object.keys(troopStats).forEach(key => {
@@ -182,7 +196,7 @@ class Attack {
     } = this.state;
 
     // stats for attackers (when retrieving range)
-    let troopStats = troopStatsBoost(this.state);
+    let troopStats = this.getBoostedTroopStats();
     let rangeMap = Object.keys(troopStats).map(key => ({name: key, ...troopStats[key]}));
     // ascending sort: defending troops with lowest range get attacked first
     rangeMap.sort((a, b) => a.range - b.range);

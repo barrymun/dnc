@@ -1,5 +1,12 @@
 /**
  *
+ */
+
+
+import tc from "../_constants/troop.constants";
+
+/**
+ *
  * @param seconds
  * @returns {Promise<any>}
  */
@@ -82,13 +89,23 @@ export const troopStatsBoost = state => {
 
   playerItems.forEach(o => {
     if (o.playerEffect.troopStats == null) return;
+
     troopStats = Object.keys(troopStats).reduce((acc1, key1) => {
       return {
         ...acc1,
         [key1]: Object.keys(troopStats[key1]).reduce((acc2, key2) => {
+
+          let value;
+          if (o.playerEffect.mathematicalOp === `multiply`) {
+            value = troopStats[key1][key2] + ~~((tc.baseTroopStats[key1][key2] * o.playerEffect.troopStats[key2]) / 100);
+          } else {
+            // default to addition
+            value = troopStats[key1][key2] + o.playerEffect.troopStats[key2];
+          }
+
           return {
             ...acc2,
-            [key2]: troopStats[key1][key2] + o.playerEffect.troopStats[key2],
+            [key2]: value,
           }
         }, ({}))
       }
