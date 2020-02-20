@@ -2,9 +2,9 @@
  *
  */
 
+import _ from "lodash";
 import tc from "../_constants/troop.constants";
 import {troopStatsBoost} from "./utils.utils";
-import _ from "lodash";
 
 
 class Attack {
@@ -13,13 +13,15 @@ class Attack {
     if (props == null) throw new Error("incorrect config");
     // deep clone and set the state so that we can easily modify without altering the global state accidentally
     this.setState(_.cloneDeep(props));
+    // create a duplicate so that a pre/post comparison can be undertaken
+    this.setOriginalState(_.cloneDeep(props));
     // boost the player's stats for calculation purposes
     this.setBoostedTroopStats(troopStatsBoost(this.getState()));
     console.log({props});
     this.fight();
   }
 
-
+  originalState = {};
   state = {};
   currentRound = 1;
   roundsRemaining = 100;
@@ -31,6 +33,27 @@ class Attack {
     [tc.cavalry]: this.distance,
   };
   boostedTroopStats = null;
+  victory = false;
+
+
+  getVictory = () => {
+    return this.victory;
+  };
+
+
+  setVictory = (victory = false) => {
+    this.victory = victory;
+  };
+
+
+  getOriginalState = () => {
+    return this.originalState;
+  };
+
+
+  setOriginalState = originalState => {
+    this.originalState = originalState;
+  };
 
 
   getState = () => {
@@ -119,6 +142,14 @@ class Attack {
       // console.log(`AFTER`, this.state.map[0].troopCount, this.state.selectedTile.troopCount)
       // console.log(`----- ROUNDS LEFT: `, this.getRoundsRemaining())
     }
+
+    if (this.getRoundsRemaining() === 0 || this.getRemainingNpcTroops() > 0) {
+      // defenders win
+    } else {
+      // attackers win
+      this.setVictory(true);
+    }
+
   };
 
 
@@ -180,7 +211,6 @@ class Attack {
         }
 
       });
-
     });
 
   };
@@ -224,7 +254,23 @@ class Attack {
       });
     });
 
+  };
 
+
+  /**
+   * TODO: incorrect reports generated
+   * compare the troops of the player city & npc city before and after the fight() phase
+   */
+  generateBattleReport = () => {
+
+    let pre = this.getOriginalState();
+    let post = this.getState();
+    let prePlayerTroops = pre.map[0].troopCount;
+    let preNpcTroops = pre.selectedTile.troopCount;
+    let postPlayerTroops = post.map[0].troopCount;
+    let postNpcTroops = post.selectedTile.troopCount;
+    let battleReport = {victory: this.getVictory(), prePlayerTroops, postPlayerTroops, preNpcTroops, postNpcTroops};
+    return battleReport;
   };
 
 }

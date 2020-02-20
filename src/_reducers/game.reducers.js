@@ -65,7 +65,7 @@ export function game(state = initialState.game, action) {
       // console.log(state.map[0].troopCount, state.selectedTile.troopCount)
       let attack = new Attack(state);
       let newState = attack.getState();
-      // console.log(newState.map[0].troopCount, newState.selectedTile.troopCount)
+      // let battleReport = attack.generateBattleReport();
 
       return {
         ...newState,
